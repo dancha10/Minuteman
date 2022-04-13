@@ -1,0 +1,16 @@
+@import "src/app/styles/variables";
+
+.toggle-modal {
+  background: none;
+
+  & svg {
+    @media (any-hover: hover) {
+      &:hover {
+        path {
+          transition: all .2s ease;
+          fill: $purpleHover
+        }
+      }
+    }
+  }
+}

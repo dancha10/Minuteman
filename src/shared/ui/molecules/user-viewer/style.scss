@@ -1,0 +1,15 @@
+@import "src/app/styles/variables";
+
+.user-viewer {
+  display: flex;
+  align-items: center;
+
+  &__fullName {
+    margin-left: 20px;
+    @media (max-width: $md3) {
+      font-size: 12px;
+      line-height: 14px;
+      margin-left: 8px;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import "../../../app/styles/variables";
+
+.login-area {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+
+  &__redirect {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: $purple;
+    transition: $transition;
+    text-decoration-color: transparent;
+
+    @media (any-hover: hover) {
+      &:hover {
+        text-decoration-color: $purpleHover;
+        text-decoration: underline;
+        color: $purpleHover;
+      }
+    }
+  }
+}

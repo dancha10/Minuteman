@@ -1,0 +1,97 @@
+@import "src/app/styles/variables";
+
+.main-page {
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: $purple;
+  overflow: hidden;
+
+  &:before {
+    content: url("./twirl.svg");
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    @media (max-width: $md5) {
+      right: -85%;
+      top: -10%;
+    }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    flex: 1 1 auto;
+  }
+
+  &__welcome {
+    margin-top: 93px;
+    max-width: 1157px;
+    color: #FFFFFF;
+
+    @media (max-width: $md3) {
+      margin-top: 43px;
+      font-size: 68px;
+      line-height: 1.125em;
+    }
+
+    @media (max-width: $md5) {
+      font-size: 48px;
+      line-height: 1.125em;
+      max-width: 290px;
+    }
+  }
+
+  &__user-preview {
+    margin-top: 87px;
+    display: flex;
+
+    @media (max-width: $md3) {
+      margin-top: 64px;
+      flex-direction: column;
+    }
+
+    &__card {
+      width: 761px;
+
+      @media (max-width: $md3) {
+        max-width: 100%;
+      }
+    }
+
+
+    // .preview__photo
+    .avatar {
+      margin-top: 32px;
+      width: 519px;
+      height: 383px;
+
+      & img {
+        width: 100%;
+      }
+
+      @media (max-width: $md3) {
+        margin-top: 0;
+        max-width: calc(100% + 15px);
+      }
+    }
+  }
+
+  &__reviews {
+    margin-top: 120px;
+    @media (max-width: $md3) {
+      margin-top: 57px;
+    }
+  }
+
+  .footer {
+    margin-top: 106px;
+
+    @media (max-width: $md3) {
+      margin-top: 82px;
+    }
+  }
+}

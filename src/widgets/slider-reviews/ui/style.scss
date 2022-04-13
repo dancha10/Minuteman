@@ -1,0 +1,162 @@
+@import "../../../app/styles/variables";
+
+.slider-review {
+  position: relative;
+  width: 1198px;
+  height: 525px;
+  background: #FFFFFF;
+  border-radius: 2px;
+  padding: 56px 56px 32px 80px;
+
+  @media (max-width: 1198px) {
+    width: calc(100% - 15px);
+    height: 100%;
+  }
+
+  @media (max-width: $md3) {
+    padding: 20px 15px 24px;
+  }
+
+  // .slider-review__header
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: $md3) {
+      & button {
+        svg {
+          margin: 0;
+        }
+      }
+    }
+
+    & h2 {
+      @media (max-width: $md3) {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 42px;
+        letter-spacing: -0.0124em;
+      }
+    }
+  }
+
+  // .slider-review__list-reviews
+  &__list-reviews {
+    margin-top: 38px;
+    @media (max-width: $md3) {
+      margin-top: 21px;
+    }
+    // transition: $transition;
+    // overflow: hidden;
+  }
+
+  &__review {
+    &:not(:last-child) {
+      margin-right: 24px;
+    }
+  }
+
+  // .slider-review__dots
+  &__dots {
+    margin-top: 28px;
+
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    text-align: center;
+
+    @media (max-width: $md3) {
+      margin-top: 20px;
+    }
+
+    & li {
+      list-style: none;
+      cursor: pointer;
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: 6px;
+      }
+
+      & button {
+        transition: $transition;
+        border: none;
+        background: $purple;
+        color: transparent;
+        cursor: pointer;
+        display: block;
+        width: 16px;
+        height: 4px;
+        opacity: .3;
+        @media (max-width: $md3) {
+          width: 16px;
+        }
+      }
+    }
+
+    & li.slick-active button {
+      width: 32px;
+      background-color: $purple;
+      opacity: 1;
+      @media (max-width: $md3) {
+        width: 24px;
+      }
+    }
+
+    & li button:hover,
+    & li button:focus {
+      background-color: $purple;
+      opacity: 1;
+    }
+  }
+
+  &__button-area {
+    position: absolute;
+    bottom: 0;
+    right: -162px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 1360px) {
+      bottom: -15%;
+      right: 0;
+    }
+
+    @media (max-width: $md3) {
+      display: none;
+    }
+
+    & button {
+      &:first-child {
+        margin-right: 16px;
+      }
+    }
+
+  }
+}
+
+/* .slick-current {
+  margin: 0;
+  padding: 0;
+
+  &:not(:last-child) {
+    margin-right: 24px;
+  }
+} */
+
+.slick-list {
+  margin: 0 -12px;
+
+  @media (max-width: $md3) {
+    margin: 0 -10px;
+  }
+
+  & .slick-slide > div {
+    padding: 0 12px;
+    @media (max-width: $md3) {
+      padding: 0 10px;
+    }
+  }
+}

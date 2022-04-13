@@ -1,0 +1,36 @@
+@import "src/app/styles/variables";
+
+.form-wrapper {
+  width: 628px;
+  background: #FFFFFF;
+  border-radius: 2px;
+  padding: 40px 40px 16px;
+
+  // .form-wrapper__header
+  &__header {
+    position: relative;
+    text-align: center;
+  }
+
+  &__redirect {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  // .form-wrapper__content
+  &__content {
+    margin-top: 32px;
+  }
+
+  &__back {
+    background: none;
+    width: 17px;
+    height: 15px;
+
+    & svg path {
+      stroke: $grey;
+    }
+  }
+}

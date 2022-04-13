@@ -1,5 +1,12 @@
 import { ReactNode, Suspense } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+
+import { Loader } from 'shared/ui/atoms/loader'
 
 export const withRouter = (component: () => ReactNode) => () => {
-	return <Suspense fallback={<h2>Loading...</h2>}>{component()}</Suspense>
+	return (
+		<BrowserRouter>
+			<Suspense fallback={<Loader isFull />}>{component()}</Suspense>
+		</BrowserRouter>
+	)
 }

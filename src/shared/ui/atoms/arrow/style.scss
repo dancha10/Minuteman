@@ -1,0 +1,25 @@
+@import "src/app/styles/variables";
+
+.arrow {
+  width: 56px;
+  height: 56px;
+  background: #FFFFFF;
+  border-radius: 2px;
+
+  @media (any-hover: hover) {
+    &:hover {
+      svg path {
+        transition: $transition;
+        stroke: $purple;
+      }
+    }
+  }
+
+  &:disabled {
+    background: $lightGrey;
+
+    svg path {
+      stroke: #ADADAD;
+    }
+  }
+}

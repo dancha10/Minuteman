@@ -1,0 +1,52 @@
+@import "src/app/styles/variables";
+
+.special {
+  svg {
+    margin-right: 0 !important;
+  }
+}
+
+.btn--dark {
+  display: flex;
+  align-items: center;
+  background: $purple;
+  color: #FFFFFF;
+  z-index: 1;
+
+  & svg {
+    margin-right: 12px;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    height: 52px;
+    width: 0;
+    left: 0;
+    top: 0;
+    background: #696DC8;
+    transition: $transition;
+    z-index: -1;
+  }
+
+  @media (any-hover: hover) {
+    &:enabled:hover:after {
+      width: 60%;
+      z-index: -1;
+    }
+  }
+
+  &:active:not([disabled]) {
+    background: $purpleHover;
+
+    &:hover:after {
+      width: 100%;
+      z-index: -2;
+      transition: all 0s ease;
+    }
+  }
+
+  &:disabled {
+    background: $grey;
+  }
+}

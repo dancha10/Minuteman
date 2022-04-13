@@ -1,0 +1,65 @@
+@import "../../../../app/styles/variables";
+
+.footer {
+  position: relative;
+  height: 64px;
+  background: #FFFFFF;
+  
+  @media (max-width: $md3) {
+    height: 84px;
+  }
+  // .footer__container
+  &__container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: $md3) {
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  // .footer__copyright
+  &__copyright {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25em;
+    color: $grey;
+
+    @media (max-width: $md3) {
+      font-size: 12px;
+      line-height: 1.67;
+      color: $dark;
+    }
+  }
+
+  // .footer__social-media
+  &__social-media {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: $md3) {
+      margin-top: 14px;
+    }
+  }
+
+  // .footer__link
+  &__link {
+    &:not(:last-child) {
+      margin-right: 21px;
+    }
+
+    & a {
+      @media (any-hover: hover) {
+        &:hover {
+          svg path {
+            transition: $transition;
+            fill: #807cdc;
+          }
+        }
+      }
+    }
+  }
+}

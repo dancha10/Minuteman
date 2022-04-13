@@ -1,0 +1,45 @@
+@import "src/app/styles/variables";
+
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .2);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none;
+  transition: $transition;
+
+  &--active {
+    opacity: 1;
+    pointer-events: all;
+    
+    @media (max-width: $md3) {
+        padding: 0 15px;
+    }
+  }
+
+  &__container {
+    padding: 24px;
+    width: 676px;
+    background: #FFFFFF;
+    transform: scale(.7);
+    opacity: .7;
+    transition: $transition;
+
+    @media (max-width: $md3) {
+        padding: 16px;
+    }
+
+    &--active {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}

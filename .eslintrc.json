@@ -42,7 +42,14 @@
         "allowForLoopAfterthoughts": true
       }
     ],
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^[A-Z]"
+      }
+    ],
     "no-shadow": "off",
+    "no-useless-escape": 0,
     "no-nested-ternary": 0,
     "no-return-await": 0,
     "consistent-return": 0,

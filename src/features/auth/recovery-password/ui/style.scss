@@ -1,0 +1,16 @@
+@import "src/app/styles/variables";
+
+.recovery-password {
+  &__button-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+
+    & button {
+      &:not(:last-child) {
+        margin-right: 12px;
+      }
+    }
+  }
+}

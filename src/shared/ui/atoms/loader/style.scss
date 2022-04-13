@@ -1,0 +1,94 @@
+@import "src/app/styles/variables";
+
+.loader-wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: #FFFFFF;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .loader {
+    transform: scale(600%);
+  }
+}
+
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 17px;
+  height: 18px;
+
+  & i {
+    position: absolute;
+    width: 2.5px;
+    height: 2.5px;
+    background: $purple;
+    border-radius: 50%;
+    animation: loader-animation 1.3s linear infinite;
+
+    &:nth-child(1) {
+      animation-delay: 0s;
+      top: 7px;
+      left: 0px;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.1s;
+      top: 3px;
+      left: 2px;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.6s;
+      bottom: 1px;
+      left: 7px;
+    }
+
+    &:nth-child(4) {
+      animation-delay: 0.3s;
+      top: 3px;
+      right: 2px;
+    }
+
+    &:nth-child(5) {
+      animation-delay: 0.4s;
+      top: 7px;
+      right: 0px;
+    }
+
+    &:nth-child(6) {
+      animation-delay: 0.5s;
+      top: 12px;
+      right: 2px;
+    }
+
+    &:nth-child(7) {
+      animation-delay: 0.2s;
+      top: 1px;
+      left: 7px;
+    }
+
+    &:nth-child(8) {
+      animation-delay: 0.7s;
+      top: 12px;
+      left: 2px;
+    }
+  }
+}
+
+
+@keyframes loader-animation {
+  0%, 20%, 80%, 100% {
+    transform: scale(1);
+    opacity: .7;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 1;
+  }
+}

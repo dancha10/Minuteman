@@ -1,0 +1,28 @@
+@import "src/app/styles/variables";
+
+.auth-form {
+
+  &__field {
+    &:not(:last-child) {
+      margin-top: 32px;
+    }
+  }
+
+  &__button-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & button {
+      margin-top: 40px;
+
+      @media (max-width: $md4) {
+        font-size: 14px;
+        line-height: 18px;
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+      }
+    }
+  }
+}

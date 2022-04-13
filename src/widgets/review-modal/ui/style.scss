@@ -1,0 +1,180 @@
+@import "../../../app/styles/variables";
+
+.review-model {
+  // .review-model__header
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: $md3) {
+      h4 {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: -0.0124em;
+      }
+    }
+  }
+
+  // .review-model__form
+  &__form {
+    margin-top: 20px;
+  }
+
+  // .review-model__label
+  &__label {
+    font-family: $fontFamilyFactor;
+    margin-bottom: 14px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25em;
+    color: $dark;
+
+    @media (max-width: $md3) {
+      margin-bottom: 8px;
+    }
+  }
+
+  // .review-model__form-field
+  &__form-field {
+    position: relative;
+    display: flex;
+
+    & input {
+      width: 395px;
+      margin-right: 16px;
+    }
+
+    @media (max-width: $md3) {
+      flex-direction: column;
+
+
+      & input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 12px;
+      }
+
+      & button {
+        width: 149px;
+        height: 42px;
+        font-size: 14px;
+        line-height: 18px;
+        letter-spacing: 0.01em;
+
+        &:after {
+          height: 42px;
+        }
+
+        & svg {
+          width: 10px;
+          height: 10px;
+          margin-right: 11px;
+        }
+      }
+    }
+  }
+
+  &__error-message {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: -22px;
+    left: 0;
+
+    & span {
+      margin-top: 2px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 1.83em;
+      color: $red;
+    }
+
+    & svg {
+      margin-right: 4px;
+      transform: rotate(45deg);
+
+      & path {
+        fill: $red;
+      }
+    }
+  }
+
+  &__file-preview {
+    margin-top: 18px;
+    @media (max-width: $md3) {
+      margin-top: 16px;
+    }
+  }
+
+  &__delete {
+    background: none;
+    @media (any-hover: hover) {
+      &:hover {
+        & svg path {
+          transition: $transition;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  // .review-model__textarea
+  &__textarea {
+    position: relative;
+    margin-top: 32px;
+
+    @media (max-width: $md3) {
+      margin-top: 24px;
+    }
+
+    & textarea {
+      min-height: 105px;
+    }
+  }
+
+  // .review-model__submit
+  &__submit {
+    margin-top: 40px;
+    display: flex;
+
+    @media (max-width: $md3) {
+      margin-top: 32px;
+      flex-direction: column;
+    }
+
+    & button {
+      margin-right: 19px;
+
+      @media (max-width: $md3) {
+        order: 2;
+        display: inline-block;
+        align-items: center;
+        padding: 12px 20px;
+        width: 100%;
+      }
+    }
+  }
+
+  // .review-model__information
+  &__information {
+    display: flex;
+    align-items: center;
+
+    & span {
+      margin-left: 11px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      color: $grey;
+    }
+
+    @media (max-width: $md3) {
+      justify-content: center;
+      order: 1;
+      margin-bottom: 12px;
+    }
+  }
+
+}

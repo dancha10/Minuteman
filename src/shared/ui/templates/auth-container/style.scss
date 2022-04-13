@@ -1,0 +1,42 @@
+@import "src/app/styles/variables";
+
+.auth-container {
+  position: relative;
+  min-height: 100%;
+  background: #585cc6;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &:before {
+    content: url('./twirl.svg');
+    position: absolute;
+    bottom: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0 0 0;
+
+    @media (max-width: $md4) {
+      padding: 20px 0 0 0;
+      svg {
+        width: 60px;
+        height: 36px;
+      }
+    }
+  }
+
+  // .auth-container__body
+  &__body {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    z-index: 2;
+  }
+}

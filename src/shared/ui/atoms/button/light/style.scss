@@ -1,0 +1,44 @@
+@import "src/app/styles/variables";
+
+.btn--light {
+  height: 52px;
+  background: #FFFFFF;
+  color: $purple;
+  z-index: 1;
+  border: 1px solid $purple;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 52px;
+    opacity: .1;
+    background: $purple;
+    border-radius: 2px;
+    transition: $transition;
+    z-index: -1;
+  }
+
+  @media (any-hover: hover) {
+    &:enabled:hover:after {
+      width: 75%;
+      z-index: -1;
+    }
+  }
+
+  &:active:not([disabled]) {
+    background: #C2C4FF;
+
+    &:hover:after {
+      width: 100%;
+      z-index: -1;
+      transition: all 0s ease;
+    }
+  }
+
+  &:disabled {
+    background: $lightGrey;
+  }
+}

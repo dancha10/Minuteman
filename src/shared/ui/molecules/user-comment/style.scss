@@ -1,0 +1,73 @@
+@import "src/app/styles/variables";
+
+.user-comment {
+  width: 520px;
+  min-height: 279px;
+  padding: 24px;
+  background: #F5F5F5;
+  border-radius: 2px;
+
+  @media (max-width: 1164px) {
+    width: 100%;
+  }
+
+  @media (max-width: $md2) {
+    padding: 16px 12px;
+    width: 100%;
+    min-height: 279px;
+    height: 348px;
+
+    & h4 {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.0124em;
+    }
+  }
+
+  // .user-comment__header
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: $md3) {
+      flex-direction: column;
+
+      & .avatar {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+
+  // .user-comment__year
+  &__year {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: $grey;
+
+    @media (max-width: $md3) {
+      margin-top: 12px;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 14px;
+    }
+  }
+
+  // .user-comment__review
+  &__review {
+    max-width: 471px;
+    word-break: break-word;
+    margin-top: 24px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.57em;
+
+    @media (max-width: $md3) {
+      margin-top: 12px;
+      font-size: 12px;
+      line-height: 20px;
+    }
+  }
+}
