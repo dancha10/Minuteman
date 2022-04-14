@@ -1,20 +1,22 @@
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { AuthFormByEmail } from 'features/auth/by-email'
 import { FormWrapper } from 'shared/ui/molecules/form-wrapper'
-import { RouterLink } from 'shared/ui/atoms/router-link'
 import { SCREENS } from 'shared/lib'
 
 import './style.scss'
 
 export const AuthArea: FC = () => {
+	const navigate = useNavigate()
+	const goRedirect = () => navigate(SCREENS.RECOVERY)
 	return (
 		<FormWrapper title='Войти'>
 			<AuthFormByEmail />
 			<div className='login-area'>
-				<RouterLink to={SCREENS.RECOVERY} classname='login-area__redirect'>
+				<button className='login-area__redirect' onClick={goRedirect}>
 					Забыли пароль?
-				</RouterLink>
+				</button>
 			</div>
 		</FormWrapper>
 	)

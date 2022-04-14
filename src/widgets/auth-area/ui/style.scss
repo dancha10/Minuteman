@@ -12,6 +12,7 @@
     color: $purple;
     transition: $transition;
     text-decoration-color: transparent;
+    background: none;
 
     @media (any-hover: hover) {
       &:hover {
