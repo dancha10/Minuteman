@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useGate } from 'effector-react'
-import { Header } from 'widgets/header'
 
+import { Header } from 'shared/ui/organisms/header'
 import { Footer } from 'shared/ui/organisms/footer'
 import { ReviewModel } from 'widgets/review-modal'
 import { SliderReviews } from 'widgets/slider-reviews'

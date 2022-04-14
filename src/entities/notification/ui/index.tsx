@@ -7,18 +7,14 @@ import { ReactComponent as RedBubble } from '../lib/redBubbles.svg'
 import { ReactComponent as Check } from '../lib/check.svg'
 import { ReactComponent as Cross } from '../lib/cross.svg'
 import { ReactComponent as Close } from '../lib/close.svg'
-import {
-	$isActiveNotification,
-	$typeNotify,
-	INotification,
-	notificationClosed,
-	setTypeNotify,
-} from '../model'
+import { $isActiveNotification, $typeNotify, INotification, notificationClosed, setNotify } from '../model'
 
 import './style.scss'
 
 export const useNotification = () => {
-	return useCallback((type: INotification['type']) => setTypeNotify(type), [])
+	return useCallback((type: INotification['type'], title: string, message: string) => {
+		setNotify({ type, title, message })
+	}, [])
 }
 
 export const NotificationWrapper: FC = () => {
@@ -29,12 +25,12 @@ export const NotificationWrapper: FC = () => {
 		<div className='notification-wrapper'>
 			{notifyType.map(notify => (
 				<div
-					key={notify}
+					key={notify.title}
 					className={classList('notification-wrapper__item', {
 						'notification-wrapper__item--exit': isActive,
 					})}
 				>
-					<Notification type={notify} />
+					<Notification type={notify.type} title={notify.title} message={notify.message} key={notify.message} />
 				</div>
 			))}
 		</div>
@@ -43,15 +39,9 @@ export const NotificationWrapper: FC = () => {
 
 // Было лень юзать classList
 
-export const Notification: FC<INotification> = ({ type }) => {
+export const Notification: FC<INotification> = ({ type, message, title }) => {
 	return (
-		<div
-			className={
-				type === 'success'
-					? 'notification notification--success'
-					: 'notification notification--error'
-			}
-		>
+		<div className={type === 'success' ? 'notification notification--success' : 'notification notification--error'}>
 			<div
 				className={
 					type === 'success'
@@ -69,18 +59,10 @@ export const Notification: FC<INotification> = ({ type }) => {
 					{type === 'success' ? <Check /> : <Cross />}
 				</div>
 			</div>
-			<div className='notification__bubble'>
-				{type === 'success' ? <GreenBubble /> : <RedBubble />}
-			</div>
+			<div className='notification__bubble'>{type === 'success' ? <GreenBubble /> : <RedBubble />}</div>
 			<div className='notification__message'>
-				<div className='notification__title'>
-					{type === 'success' ? 'Успешно!' : 'Что-то не так...'}
-				</div>
-				<p>
-					{type === 'success'
-						? 'Спасибо за отзыв о нашей компании :)'
-						: 'Не получилось отправить отзыв. Попробуйте еще раз!'}
-				</p>
+				<div className='notification__title'>{title}</div>
+				<p>{message}</p>
 			</div>
 			<div className='notification__close'>
 				<button onClick={() => notificationClosed(true)}>

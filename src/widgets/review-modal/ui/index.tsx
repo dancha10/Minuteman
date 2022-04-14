@@ -10,12 +10,13 @@ import { Modal } from 'shared/ui/atoms/modal'
 import { Input } from 'shared/ui/atoms/input'
 import { Textarea } from 'shared/ui/atoms/textarea'
 import { FilePreview } from 'shared/ui/molecules/file-preview'
-import { ReactComponent as Information } from 'widgets/review-modal/lib/info.svg'
-import { ReactComponent as Cross } from 'widgets/review-modal/lib/cross.svg'
-import { ReactComponent as Delete } from 'widgets/review-modal/lib/delete.svg'
-import { detailedReviewValidator, fullNameValidator } from 'widgets/review-modal/lib/validator'
 
-import 'widgets'
+import { ReactComponent as Information } from '../lib/info.svg'
+import { ReactComponent as Cross } from '../lib/cross.svg'
+import { ReactComponent as Delete } from '../lib/delete.svg'
+import { detailedReviewValidator, fullNameValidator } from '../lib/validator'
+
+import './style.scss'
 
 interface IReviewModalInputs {
 	fullName: string
@@ -46,7 +47,7 @@ export const ReviewModel: FC = () => {
 			dateOfPost: SendingReviewModel.localeDateString(),
 		})
 		ToggleModel.clickedButton()
-		notify('success')
+		notify('success', 'Успешно!', 'Спасибо за отзыв о нашей компании :)')
 		deleteFile()
 		reset()
 	}

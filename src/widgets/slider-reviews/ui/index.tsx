@@ -7,9 +7,10 @@ import { Button } from 'shared/ui/atoms/button'
 import { UserComment } from 'shared/ui/molecules/user-comment'
 import { ArrowSlider } from 'shared/ui/atoms/arrow'
 import { $isMobileWidth } from 'shared/lib'
-import { $userReviews } from 'widgets/slider-reviews/model'
 
-import 'widgetsss'
+import { $userReviews } from '../model'
+
+import './style.scss'
 
 export const SliderReviews: FC = () => {
 	const isMobileWidth = useStore($isMobileWidth)

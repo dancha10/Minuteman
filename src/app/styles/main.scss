@@ -93,3 +93,9 @@ h4 {
     padding: 12px;
   }
 }
+
+.container {
+  max-width: $maxWidth;
+  padding: 0 15px;
+  margin: 0 auto;
+}

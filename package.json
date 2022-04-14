@@ -1,23 +1,28 @@
 {
   "name": "minuteman",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "homepage": "https://dancha10.github.io/Minuteman/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d build",
+    "predeploy": "yarn build"
   },
   "dependencies": {
     "classnames": "^2.3.1",
     "compose-function": "^3.0.3",
     "effector": "^22.2.0",
     "effector-react": "^22.0.6",
+    "gh-pages": "^3.2.3",
     "patronum": "^1.8.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.29.0",
     "react-router-dom": "^6.3.0",
     "react-slick": "^0.28.1",
+    "react-transition-group": "^4.4.2",
     "sass": "^1.50.0",
     "slick-carousel": "^1.8.1"
   },
@@ -30,6 +35,7 @@
     "@types/react-dom": "^17.0.10",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-slick": "^0.23.8",
+    "@types/react-transition-group": "^4.4.4",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "@vitejs/plugin-react": "^1.0.7",

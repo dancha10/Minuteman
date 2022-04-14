@@ -10,5 +10,3 @@ export const $authFormData = createStore<IAuthFormFields>({
 	login: '',
 	password: '',
 }).on(sentAuthForm, (_, fields) => fields)
-
-$authFormData.watch(el => console.log(el))

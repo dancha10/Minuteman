@@ -3,15 +3,17 @@ import { debounce } from 'patronum/debounce'
 
 export interface INotification {
 	type: 'success' | 'error'
+	title: string
+	message: string
 }
 
 export const notificationClosed = createEvent<boolean>()
 export const $isActiveNotification = createStore(false).on(notificationClosed, (_, state) => state)
 
 export const resetTypeNotify = createEvent()
-export const setTypeNotify = createEvent<INotification['type']>()
-export const $typeNotify = createStore<Array<INotification['type']>>([])
-	.on(setTypeNotify, (array, notify) => [notify])
+export const setNotify = createEvent<INotification>()
+export const $typeNotify = createStore<Array<INotification>>([])
+	.on(setNotify, (array, notify) => [notify])
 	.reset(resetTypeNotify)
 
 export const debouncedResetArray = debounce({
@@ -34,7 +36,7 @@ sample({
 })
 
 export const debouncedAutoClose = debounce({
-	source: setTypeNotify,
+	source: setNotify,
 	timeout: 5000,
 })
 

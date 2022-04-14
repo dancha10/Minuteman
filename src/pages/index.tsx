@@ -1,16 +1,16 @@
-import { FC, lazy, useState } from 'react'
+import { FC, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { useStore } from 'effector-react'
 
-import { SCREENS } from 'shared/lib'
+import { $isAuthenticated, SCREENS } from 'shared/lib'
 
 const SignInPage = lazy(() => import('pages/auth/sign-in'))
 const RecoveryPasswordPage = lazy(() => import('pages/auth/recovery-password'))
 const LandingPage = lazy(() => import('pages/main'))
 
 export const Router: FC = () => {
-	// TODO проверочку на isAuth
-	const [isAuth] = useState(false)
-	if (isAuth) {
+	const isAuthenticated = useStore($isAuthenticated)
+	if (isAuthenticated) {
 		return (
 			<Routes>
 				<Route path={SCREENS.MAIN} element={<LandingPage />} />
