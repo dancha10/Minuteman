@@ -5,7 +5,7 @@ import { useStore } from 'effector-react'
 
 import { Button } from 'shared/ui/atoms/button'
 import { Input } from 'shared/ui/atoms/input'
-import { authValidation, userData, SCREENS, changedAuthenticated } from 'shared/lib'
+import { authValidation, userData, changedAuthenticated, SCREENS } from 'shared/lib'
 import { ErrorModel } from 'entities/error'
 
 import { IAuthFormFields, sentAuthForm } from '../model'
@@ -17,6 +17,8 @@ export const AuthFormByEmail: FC = () => {
 	const {
 		register,
 		handleSubmit,
+		reset,
+		getValues,
 		formState: { errors },
 	} = useForm<IAuthFormFields>({ mode: 'onChange' })
 
@@ -26,10 +28,13 @@ export const AuthFormByEmail: FC = () => {
 		if (findUser) {
 			changedAuthenticated(true)
 			navigate(SCREENS.MAIN)
+			reset()
 		} else {
 			ErrorModel.setError('Такого пользователя не существует')
 		}
 	}
+
+	const disabledButton = (): boolean => !!isErrorToServer || !getValues('login') || !getValues('password')
 
 	const isErrorToServer = useStore(ErrorModel.$errorMessage)
 	return (
@@ -57,7 +62,7 @@ export const AuthFormByEmail: FC = () => {
 				/>
 			</div>
 			<div className='auth-form__button-area'>
-				<Button.Dark type='submit' disabled={!!isErrorToServer}>
+				<Button.Dark type='submit' disabled={disabledButton()}>
 					Войти
 				</Button.Dark>
 			</div>

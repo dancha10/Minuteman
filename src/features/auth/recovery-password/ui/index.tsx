@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNotification } from 'entities/notification'
 import { Button } from 'shared/ui/atoms/button'
 import { Input } from 'shared/ui/atoms/input'
-import { authValidation } from 'shared/lib'
+import { authValidation, SCREENS } from 'shared/lib'
 
 import './style.scss'
 
@@ -23,7 +23,7 @@ export const RecoveryPassword: FC = () => {
 	const notify = useNotification()
 	const navigate = useNavigate()
 
-	const goBack = () => navigate(-1)
+	const goBack = () => navigate(SCREENS.LOGIN)
 
 	const onSubmit: SubmitHandler<IRecoveryField> = data => {
 		console.log(data)

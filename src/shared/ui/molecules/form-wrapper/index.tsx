@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { ArrowSlider } from 'shared/ui/atoms/arrow'
+import { SCREENS } from 'shared/lib'
 
 import './style.scss'
 
@@ -12,7 +13,7 @@ interface IFormWrapper {
 
 export const FormWrapper: FC<IFormWrapper> = ({ title, children, canGoBack = false }) => {
 	const navigate = useNavigate()
-	const goBack = () => navigate(-1)
+	const goBack = () => navigate(SCREENS.LOGIN)
 
 	return (
 		<div className='form-wrapper'>

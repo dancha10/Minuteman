@@ -1,21 +1,23 @@
 import { FC } from 'react'
+import { Outlet } from 'react-router-dom'
 
 import { Footer } from 'shared/ui/organisms/footer'
-
-import { ReactComponent as Logo } from './logo.svg'
+import { Logo } from 'shared/ui/atoms/logo'
 
 import './style.scss'
 
-export const AuthContainer: FC = ({ children }) => {
+const AuthContainer: FC = () => {
 	return (
 		<div className='auth-container'>
 			<header className='auth-container__header'>
-				<a href='https://ilink.dev/promo/academy.html' target='_blank' rel='noreferrer'>
-					<Logo />
-				</a>
+				<Logo color='white' />
 			</header>
-			<main className='auth-container__body'>{children}</main>
+			<main className='auth-container__body'>
+				<Outlet />
+			</main>
 			<Footer />
 		</div>
 	)
 }
+
+export default AuthContainer

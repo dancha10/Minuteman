@@ -1,0 +1,19 @@
+@import "src/app/styles/variables";
+
+.logo {
+  @media (max-width: $md4) {
+    svg {
+      width: 59px;
+      height: 36px;
+    }
+  }
+  @media (max-width: $md4) {
+    margin-left: -30px;
+  }
+}
+
+.white {
+  svg path {
+    fill: white;
+  }
+}

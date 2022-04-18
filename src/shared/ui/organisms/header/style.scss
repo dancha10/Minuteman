@@ -10,7 +10,6 @@
 
   // .header__container
   &__container {
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,19 +40,6 @@
         font-size: 12px;
         line-height: 1.17em;
       }
-    }
-  }
-
-  // .header__logo
-  &__logo {
-    @media (max-width: $md4) {
-      svg {
-        width: 59px;
-        height: 36px;
-      }
-    }
-    @media (max-width: $md4) {
-      margin-left: -30px;
     }
   }
 }
