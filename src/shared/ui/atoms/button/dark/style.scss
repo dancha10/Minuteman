@@ -7,10 +7,9 @@
 }
 
 .btn--dark {
+  color: #FFFFFF;
   display: flex;
   align-items: center;
-  background: $purple;
-  color: #FFFFFF;
   z-index: 1;
 
   & svg {
@@ -24,7 +23,6 @@
     width: 0;
     left: 0;
     top: 0;
-    background: #696DC8;
     transition: $transition;
     z-index: -1;
   }
@@ -48,5 +46,29 @@
 
   &:disabled {
     background: $grey;
+  }
+}
+
+.btn--primary {
+  background: $purple;
+
+  &:after {
+    background: #696DC8;
+  }
+
+  &:active:not([disabled]) {
+    background: $purpleHover;
+  }
+}
+
+.btn--red {
+  background: $red;
+
+  &:after {
+    background: #F96D6D;
+  }
+
+  &:active:not([disabled]) {
+    background: #FF7171;
   }
 }
