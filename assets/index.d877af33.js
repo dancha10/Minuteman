@@ -1,0 +1,1 @@
+import{L as e,F as r}from"./index.6882fb8e.js";import{j as t,a}from"./index.fca57084.js";import{O as o}from"./vendor.5847b7f8.js";const c=()=>t("div",{className:"auth-container",children:[a("header",{className:"auth-container__header",children:a(e,{color:"white"})}),a("main",{className:"auth-container__body",children:a(o,{})}),a(r,{})]});export{c as default};
