@@ -1,0 +1,1 @@
+.arrow{width:56px;height:56px;background:#FFFFFF;border-radius:2px}@media (any-hover: hover){.arrow:hover svg path{transition:all .3s ease;stroke:#585cc6}}.arrow:disabled{background:#E0E0E0}.arrow:disabled svg path{stroke:#adadad}

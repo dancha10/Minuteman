@@ -1,0 +1,1 @@
+import{A as i}from"./index.04de21a7.js";import{j as t,a as s}from"./index.c4d28560.js";const o=({fullName:r,image:e,isMobileWidth:a})=>t("div",{className:"user-viewer",children:[s(i,{image:e}),s("h4",{className:"user-viewer__fullName",children:a?r.split(" ")[0]:r})]});export{o as U};
