@@ -4,7 +4,17 @@
   position: relative;
   min-width: 192px;
 
+  & label {
+    font-family: $fontFamilyFactor;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.0124em;
+    color: $dark;
+  }
+
   & textarea {
+    font-family: $fontFamilyGilroy;
     min-height: 105px;
     resize: none;
     width: 100%;

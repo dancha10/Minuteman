@@ -1,5 +1,7 @@
 import { createEvent, createStore, sample } from 'effector'
 
+import { setError } from 'entities/error/model'
+
 export const resetStores = createEvent()
 
 export const savedUploadImage = createEvent<string>()
@@ -20,16 +22,18 @@ export const $percentLoading = createStore<number>(1)
 	.reset(resetStores)
 
 export const imageReader = (files: FileList | null) => {
-	if (!files) return console.log('Error')
+	if (!files) return setError('Error')
 	const file = files[0]
 
 	if (!/\.(jpe?g|png)$/i.test(file?.name)) {
 		changedPercentLoading(100)
+		setError('Доступные форматы изображений: jpeg и png.')
 		return setErrorMessage('Разрешены: jpeg и png')
 	}
 
 	if (file.size > 1024 * 1024 * 5) {
 		changedPercentLoading(100)
+		setError('Ошибка загрузки. Размер файла превышает 5Mb.')
 		return setErrorMessage('Your file is too big!')
 	}
 	const reader = new FileReader()

@@ -62,7 +62,7 @@ export const AuthFormByEmail: FC = () => {
 				/>
 			</div>
 			<div className='auth-form__button-area'>
-				<Button.Dark type='submit' color='red' disabled={disabledButton()}>
+				<Button.Dark type='submit' disabled={disabledButton()}>
 					Войти
 				</Button.Dark>
 			</div>

@@ -11,11 +11,7 @@ interface IModal {
 
 export const Modal: FC<IModal> = ({ isOpen, toggleOpen, children }) => {
 	return ReactDOM.createPortal(
-		<div
-			className={classList('modal', { 'modal--active': isOpen })}
-			onClick={() => toggleOpen()}
-			role='presentation'
-		>
+		<div className={classList('modal', { 'modal--active': isOpen })} onClick={() => toggleOpen()} role='presentation'>
 			<div
 				className={classList('modal__container', {
 					'modal__container--active': isOpen,

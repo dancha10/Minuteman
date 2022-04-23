@@ -10,6 +10,8 @@ import { Modal } from 'shared/ui/atoms/modal'
 import { Input } from 'shared/ui/atoms/input'
 import { Textarea } from 'shared/ui/atoms/textarea'
 import { FilePreview } from 'shared/ui/molecules/file-preview'
+import { Button } from 'shared/ui/atoms/button'
+import { resetStores } from 'features/upload-file/model'
 
 import { ReactComponent as Information } from '../lib/info.svg'
 import { ReactComponent as Cross } from '../lib/cross.svg'
@@ -61,12 +63,17 @@ export const ReviewModel: FC = () => {
 		}
 	}
 
+	const clickButton = () => {
+		fileRef?.current?.click()
+		resetStores()
+	}
+
 	return (
 		<Modal isOpen={isOpen} toggleOpen={ToggleModel.clickedButton}>
 			<div className='review-model'>
 				<div className='review-model__header'>
 					<h4>Отзыв</h4>
-					<ToggleModal />
+					<ToggleModal toggle={ToggleModel.clickedButton} />
 				</div>
 				<form className='review-model__form' onSubmit={handleSubmit(onSubmit)}>
 					<p className='review-model__label'>Как вас зовут?</p>
@@ -76,7 +83,11 @@ export const ReviewModel: FC = () => {
 							validation={{ ...register('fullName', fullNameValidator) }}
 							isError={!!errors.fullName}
 						/>
-						<UploadFile fileRef={fileRef} />
+						<UploadFile fileRef={fileRef}>
+							<Button.Dark onClickHandler={clickButton} addition>
+								Загрузить фото
+							</Button.Dark>
+						</UploadFile>
 						{errors.fullName && (
 							<div className='review-model__error-message'>
 								<Cross width={10} height={10} />

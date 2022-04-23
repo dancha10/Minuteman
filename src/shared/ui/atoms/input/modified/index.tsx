@@ -13,9 +13,20 @@ interface IInputModified extends Types.IInput {
 	label: string
 	errorMessage?: string
 	id: string
+	value?: string
 }
 
-export const Modified: FC<IInputModified> = ({ type, placeholder, label, id, isError, errorMessage, validation }) => {
+export const Modified: FC<IInputModified> = ({
+	type,
+	placeholder,
+	label,
+	id,
+	isError,
+	errorMessage,
+	validation,
+	disabled,
+	value,
+}) => {
 	const [isVisibleContent, setIsVisibleContent] = useState<boolean>(type === 'text')
 	const [isActive, setIsActive] = useState(false)
 	const changedActive = (value: string) => (value.length ? setIsActive(true) : setIsActive(false))
@@ -25,6 +36,7 @@ export const Modified: FC<IInputModified> = ({ type, placeholder, label, id, isE
 			{label}
 			<div className='input-field__container'>
 				<input
+					{...validation}
 					type={isVisibleContent ? 'text' : 'password'}
 					placeholder={placeholder}
 					className='input-field__input'
@@ -33,7 +45,9 @@ export const Modified: FC<IInputModified> = ({ type, placeholder, label, id, isE
 					data-is-error={isError}
 					id={id}
 					onInput={event => changedActive(event.currentTarget.value)}
-					{...validation}
+					disabled={disabled}
+					defaultValue={value}
+
 					// TODO режим onChange mode из react-hook-form конфликтует с onChange инпута чтоб навешивать active-классы
 				/>
 				<div className='input-field__assistants-area'>

@@ -11,13 +11,8 @@ interface ILogo {
 
 export const Logo: FC<ILogo> = ({ color }) => {
 	return (
-		<a
-			href='https://ilink.dev/promo/academy.html'
-			target='_blank'
-			className={classNames('header__logo', { [`${color}`]: color })}
-			rel='noreferrer'
-		>
+		<div className={classNames('header__logo', { [`${color}`]: color })}>
 			<LogoSvg />
-		</a>
+		</div>
 	)
 }

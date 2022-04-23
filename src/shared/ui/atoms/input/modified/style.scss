@@ -51,6 +51,16 @@
         letter-spacing: -0.0124em;
       }
     }
+
+    &:disabled {
+      background: #FFFFFF;
+      border: 1px solid $lightGrey;
+
+      &::placeholder {
+        color: $lightGrey;
+      }
+    }
+
   }
 
   &__assistants-area {

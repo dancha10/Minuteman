@@ -1,0 +1,68 @@
+@import "src/app/styles/variables";
+
+.list-user {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 88px;
+  padding: 24px;
+  // .user-list__presentation
+  &__presentation {
+    width: 274px;
+
+    & .avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    & h4 {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
+      color: #464E5F;
+      margin-left: 12px;
+    }
+  }
+
+  // .user-list__information
+  &__information {
+    width: 492px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #464E5F;
+  }
+
+  // .user-list__status
+  &__status {
+    width: 140px;
+  }
+
+  &__status-button {
+    width: 138px;
+    height: 34px;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--studying {
+      background: #F0F9ED;
+      color: #61BF4A;
+    }
+
+    &--expelled {
+      background: #FDEEEE;
+      color: #EB5757;
+    }
+
+    &--graduated {
+      color: $grey;
+      background: #F5F5F5;
+    }
+  }
+}

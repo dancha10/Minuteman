@@ -16,7 +16,7 @@ const MainPage: FC = () => {
 	useGate(MainPageGate)
 	return (
 		<div className='main-page'>
-			<Header />
+			<Header type='primary' />
 			<main className='main-page__container container'>
 				<h1 className='main-page__welcome'>Добро пожаловать в академию!</h1>
 				<div className='main-page__user-preview'>

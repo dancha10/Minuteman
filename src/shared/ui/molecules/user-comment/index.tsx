@@ -5,7 +5,7 @@ import { IAvatar } from 'shared/ui/atoms/avatar'
 
 import './style.scss'
 
-interface IUserComment extends IAvatar {
+export interface IUserComment extends IAvatar {
 	review: string
 	name: string
 	dateOfPost: string

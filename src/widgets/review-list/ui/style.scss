@@ -1,0 +1,15 @@
+@import "src/app/styles/variables";
+
+.review-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &__item {
+    &:nth-child(1), &:nth-child(2) {
+      margin-top: 34px;
+    }
+
+    margin-top: 24px;
+  }
+}

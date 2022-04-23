@@ -4,7 +4,7 @@ import { Avatar, IAvatar } from 'shared/ui/atoms/avatar'
 
 import './style.scss'
 
-interface IUserViewer extends IAvatar {
+export interface IUserViewer extends IAvatar {
 	fullName: string
 	isMobileWidth?: boolean
 }

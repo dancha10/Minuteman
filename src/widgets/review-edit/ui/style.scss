@@ -1,0 +1,25 @@
+.review-edit {
+  // .review-edit__header
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  // .review-edit__container
+  &__container {
+    margin-top: 20px;
+  }
+
+  // .review-edit__area-button
+  &__area-button {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+
+    & button:first-child {
+      width: 320px;
+      margin-right: 12px;
+    }
+  }
+}

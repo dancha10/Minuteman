@@ -9,6 +9,7 @@ export interface IUserReview {
 	dateOfPost: string
 	review: string
 	avatar?: string
+	status?: 'published' | 'unpublished' | 'rejected'
 }
 
 export interface IInput {
@@ -16,4 +17,8 @@ export interface IInput {
 	disabled?: boolean
 	validation?: object
 	isError: boolean
+}
+
+export interface OptionProps {
+	option: { value: string; label: string }
 }

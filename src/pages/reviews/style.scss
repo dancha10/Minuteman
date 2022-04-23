@@ -1,0 +1,24 @@
+@import "src/app/styles/variables";
+
+.reviews-page {
+  // .reviews-page__header
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    @media (max-width: $md3) {
+        flex-direction: column;
+    }
+  }
+
+  // .reviews-page__dropdown
+  &__dropdown {
+    width: 256px;
+  }
+
+  // .reviews-page__reviews-area
+  &__reviews-area {
+    //margin-top: 34px;
+  }
+}

@@ -1,8 +1,6 @@
 import { FC, RefObject } from 'react'
 
-import { Button } from 'shared/ui/atoms/button'
-
-import { imageReader, resetStores } from '../model'
+import { imageReader } from '../model'
 
 import './style.scss'
 
@@ -10,11 +8,7 @@ interface IUploadFile {
 	fileRef: RefObject<HTMLInputElement>
 }
 
-export const UploadFile: FC<IUploadFile> = ({ fileRef }) => {
-	const clickButton = () => {
-		fileRef?.current?.click()
-		resetStores()
-	}
+export const UploadFile: FC<IUploadFile> = ({ fileRef, children }) => {
 	return (
 		<label htmlFor='file' className='file-upload' title='Загрузить изображение'>
 			<input
@@ -25,9 +19,7 @@ export const UploadFile: FC<IUploadFile> = ({ fileRef }) => {
 				accept='.png, .jpg, .jpeg'
 				onChange={e => imageReader(e.target.files)}
 			/>
-			<Button.Dark onClickHandler={clickButton} addition>
-				Загрузить фото
-			</Button.Dark>
+			{children}
 		</label>
 	)
 }
