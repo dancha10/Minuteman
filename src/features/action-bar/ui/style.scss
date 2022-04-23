@@ -6,6 +6,10 @@
   border-radius: 2px;
   height: 363px;
 
+  @media (max-width: $md3) {
+    height: 100%;
+  }
+
   &--published, {
     background: #f8fff6;
 
@@ -28,11 +32,25 @@
     justify-content: space-between;
     height: 52px;
     align-items: flex-end;
+
+    @media (max-width: $md3) {
+      & button {
+        max-width: 108px;
+        font-size: 14px;
+        line-height: 18px;
+        padding: 12px 6px;
+      }
+      padding: 0px 12px 0px 12px;
+    }
   }
 
   &__control-button {
     display: flex;
     width: 340px;
+
+    @media (max-width: $md3) {
+      width: 100%;
+    }
 
     & button:first-child {
       margin-right: 12px;
@@ -44,6 +62,10 @@
     & button {
       width: 52px;
     }
+
+    @media (max-width: $md3) {
+      margin-left: 12px;
+    }
   }
 
 
@@ -54,9 +76,20 @@
     font-size: 18px;
     line-height: 18px;
     letter-spacing: 0.01em;
+    @media (max-width: $md3) {
+      & p {
+        font-size: 16px;
+        line-height: 18px;
+      }
+    }
 
     & svg {
       margin-right: 14px;
+      @media (max-width: $md3) {
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+      }
     }
 
     &--published {

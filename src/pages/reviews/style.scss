@@ -6,15 +6,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     @media (max-width: $md3) {
-        flex-direction: column;
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 
   // .reviews-page__dropdown
   &__dropdown {
     width: 256px;
+    @media (max-width: $md3) {
+      margin-top: 16px;
+      width: 100%;
+    }
   }
 
   // .reviews-page__reviews-area
