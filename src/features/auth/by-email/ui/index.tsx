@@ -27,7 +27,7 @@ export const AuthFormByEmail: FC = () => {
 		const findUser = userData.find(user => user.login === data.login && user.password === data.password) // имитация бэка
 		if (findUser) {
 			changedAuthenticated(true)
-			navigate(SCREENS.MAIN)
+			navigate(SCREENS.USERS)
 			reset()
 		} else {
 			ErrorModel.setError('Такого пользователя не существует')
