@@ -36,3 +36,51 @@ export const userReviews: Array<IUserReview> = [
 		status: 'unpublished',
 	},
 ]
+
+type userType = {
+	name: string
+	description: string
+	status: 'studying' | 'expelled' | 'graduated'
+}
+export const users: userType[] = [
+	{
+		name: 'Акакий Акакиевич',
+		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
+		status: 'studying',
+	},
+	{
+		name: 'Акакий Акакиевич',
+		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
+		status: 'expelled',
+	},
+	{
+		name: 'Акакий Акакиевич',
+		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
+		status: 'expelled',
+	},
+	{
+		name: 'Акакий Акакиевич',
+		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
+		status: 'graduated',
+	},
+	{
+		name: 'Акакий Акакиевич',
+		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
+		status: 'studying',
+	},
+	{
+		name: 'Акакий Акакиевич',
+		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
+		status: 'studying',
+	},
+	{
+		name: 'Акакий Акакиевич',
+		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
+		status: 'studying',
+	},
+	{
+		name: 'Акакий Акакиевич',
+		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
+		status: 'studying',
+	},
+]

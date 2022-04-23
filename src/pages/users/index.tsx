@@ -2,6 +2,7 @@ import { FC, useState } from 'react'
 
 import { Pagination } from 'widgets/pagination'
 import { Dropdown } from 'shared/ui/atoms/dropdown'
+import { users } from 'shared/lib'
 
 import './style.scss'
 
@@ -10,54 +11,6 @@ const options: { value: string; label: string }[] = [
 	{ value: 'expelled', label: 'Отчислен' },
 	{ value: 'studying', label: 'Обучается' },
 	{ value: 'graduated', label: 'Закончил' },
-]
-
-type userType = {
-	name: string
-	description: string
-	status: 'studying' | 'expelled' | 'graduated'
-}
-const users: userType[] = [
-	{
-		name: 'Акакий Акакиевич',
-		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
-		status: 'studying',
-	},
-	{
-		name: 'Акакий Акакиевич',
-		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
-		status: 'expelled',
-	},
-	{
-		name: 'Акакий Акакиевич',
-		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
-		status: 'expelled',
-	},
-	{
-		name: 'Акакий Акакиевич',
-		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
-		status: 'graduated',
-	},
-	{
-		name: 'Акакий Акакиевич',
-		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
-		status: 'studying',
-	},
-	{
-		name: 'Акакий Акакиевич',
-		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
-		status: 'studying',
-	},
-	{
-		name: 'Акакий Акакиевич',
-		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
-		status: 'studying',
-	},
-	{
-		name: 'Акакий Акакиевич',
-		description: 'Люблю пепперони и старые серии смешариков. А вы были на Таити?',
-		status: 'studying',
-	},
 ]
 
 const UsersPage: FC = () => {

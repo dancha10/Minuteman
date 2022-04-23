@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from 'effector-react'
@@ -34,7 +34,7 @@ export const AuthFormByEmail: FC = () => {
 		}
 	}
 
-	const disabledButton = (): boolean => !!isErrorToServer || !getValues('login') || !getValues('password')
+	// const disabledButton = (): boolean => !!isErrorToServer || !getValues('login') || !getValues('password')
 
 	const isErrorToServer = useStore(ErrorModel.$errorMessage)
 	return (
@@ -62,9 +62,7 @@ export const AuthFormByEmail: FC = () => {
 				/>
 			</div>
 			<div className='auth-form__button-area'>
-				<Button.Dark type='submit' disabled={disabledButton()}>
-					Войти
-				</Button.Dark>
+				<Button.Dark type='submit'>Войти</Button.Dark>
 			</div>
 		</form>
 	)

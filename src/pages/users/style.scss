@@ -5,11 +5,20 @@
   &__header {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: $md3) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   // .user-page__dropdown
   &__dropdown {
     width: 163px;
+
+    @media (max-width: $md3) {
+      width: 144px;
+    }
   }
 
   // .user-page__user-list
@@ -20,6 +29,9 @@
 
 .user-list {
   margin-top: 38px;
+  @media (max-width: $md3) {
+    margin-top: 20px;
+  }
   // .user-list__header
   &__header {
     border-radius: 6px;
@@ -29,6 +41,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: $md3) {
+      width: 200%;
+    }
 
     & p {
       font-weight: 700;

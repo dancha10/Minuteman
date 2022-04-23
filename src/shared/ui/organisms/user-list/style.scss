@@ -7,6 +7,9 @@
   align-items: center;
   height: 88px;
   padding: 24px;
+  @media (max-width: $md3) {
+    width: 200%;
+  }
   // .user-list__presentation
   &__presentation {
     width: 274px;
@@ -32,6 +35,10 @@
     font-size: 14px;
     line-height: 17px;
     color: #464E5F;
+    @media (max-width: $md3) {
+      font-size: 12px;
+      line-height: 14px;
+    }
   }
 
   // .user-list__status
