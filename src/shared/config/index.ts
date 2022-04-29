@@ -4,3 +4,5 @@ export const getEnvVar = (key: string) => {
 	}
 	return import.meta.env[key] || ''
 }
+
+export const BASE_URL = getEnvVar('VITE_BASE_URL')

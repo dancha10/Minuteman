@@ -22,3 +22,47 @@ export interface IInput {
 export interface OptionProps {
 	option: { value: string; label: string }
 }
+
+export interface IUserInfo {
+	name: string
+	description: string
+	status: 'studying' | 'expelled' | 'graduated'
+}
+
+export interface AuthType {
+	accessToken: string
+	expiresIn: number
+	tokenType: string
+	refreshToken: string
+}
+
+export interface MyProfileType {
+	firstName: string
+	lastName: string
+	profileImage: string
+	birthDate: string
+	gender: 'male' | 'female'
+	cityOfResidence: string
+	favoriteFood: string | null
+	hasPet: boolean
+	petType: string | null
+	petName: string | null
+	aboutMe: string
+	smallAboutMe: string | null
+	academyStatus: 'studies'
+}
+
+export interface ListReviewsType {
+	id: string
+	version: 1
+	authorImage: string | null
+	authorName: string
+	title: string
+	text: string
+	status: 'onCheck'
+}
+
+export interface CaptchaType {
+	base64Image: string
+	key: string
+}

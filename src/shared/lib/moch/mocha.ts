@@ -37,7 +37,7 @@ export const userReviews: Array<IUserReview> = [
 	},
 ]
 
-type userType = {
+export type userType = {
 	name: string
 	description: string
 	status: 'studying' | 'expelled' | 'graduated'
