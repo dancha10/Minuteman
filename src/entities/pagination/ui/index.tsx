@@ -1,50 +1,54 @@
-import { FC, ReactNode, useState } from 'react'
+import { FC, ReactNode, useEffect } from 'react'
+import { useStore } from 'effector-react'
 import Pagination from 'rc-pagination'
 
-import { UserList } from 'shared/ui/organisms/user-list'
+import { $currentPaginationList, $list, changedRangeViewer, setCurrentPage, setList } from 'entities/pagination/model'
 
-import { ReactComponent as Next } from '../next.svg'
+import { ReactComponent as Arrow } from '../next.svg'
 
 import './style.scss'
 
 interface IPagination {
-	list: Array<any>
 	rangeViewer: number
 }
 
-export const PaginationList: FC<IPagination> = ({ list, rangeViewer }) => {
-	const [currentPage, setCurrentPage] = useState<number>(1)
-	const lastUserIndex = currentPage * rangeViewer
-	const firstUserIndex = lastUserIndex - rangeViewer
-	const currentUserList = list.slice(firstUserIndex, lastUserIndex)
-
-	const itemRender = (
-		current: number,
-		type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next',
-		element: ReactNode
-	) => {
-		if (type === 'page') {
-			return (
-				<div role='presentation' onClick={() => setCurrentPage(current)} onKeyPress={() => setCurrentPage(current)}>
-					{current}
-				</div>
-			)
-		}
-		return element
+const itemRender = (
+	current: number,
+	type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next',
+	element: ReactNode
+) => {
+	const changedCurrentPage = () => {
+		setCurrentPage(current)
 	}
+
+	if (type === 'page') {
+		return (
+			<div role='presentation' onClick={changedCurrentPage} onKeyPress={changedCurrentPage}>
+				{current}
+			</div>
+		)
+	}
+	return element
+}
+
+export const PaginationList: FC<IPagination> = ({ rangeViewer, children }) => {
+	useEffect(() => {
+		changedRangeViewer(rangeViewer)
+	}, [])
+
+	useEffect(() => {
+		setList(children)
+	}, [children])
+
+	const initialList = useStore($list)
+	const userListPagination = useStore($currentPaginationList)
 
 	return (
 		<div className='pagination'>
-			<ul className='pagination__list'>
-				{currentUserList.map(el => (
-					<li className='pagination__element' key={el.name + Math.floor(Math.random() * 999)}>
-						<UserList information={el.description} status={el.status} fullName={el.name} />
-					</li>
-				))}
-			</ul>
+			<ul className='pagination__list'>{userListPagination}</ul>
 			<div className='pagination__dots'>
 				<Pagination
-					total={list.length}
+					total={initialList?.length}
 					pageSize={rangeViewer}
 					itemRender={itemRender}
 					showSizeChanger
@@ -52,12 +56,12 @@ export const PaginationList: FC<IPagination> = ({ list, rangeViewer }) => {
 					pageSizeOptions={[1, 2, 5, 10]}
 					nextIcon={
 						<div className='pagination__dots--next'>
-							<Next />
+							<Arrow />
 						</div>
 					}
 					prevIcon={
 						<div className='pagination__dots--prev'>
-							<Next />
+							<Arrow />
 						</div>
 					}
 				/>

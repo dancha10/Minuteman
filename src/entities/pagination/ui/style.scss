@@ -6,7 +6,7 @@
     min-height: 533px;
   }
 
-  &__element {
+  &__list-element {
     &:not(:last-child) {
       border-bottom: 1px dashed $lightGrey;
     }

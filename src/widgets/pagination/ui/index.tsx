@@ -1,27 +1,32 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
+import { useStore } from 'effector-react'
 
+import { UserList } from 'shared/ui/organisms/user-list'
 import { PaginationList } from 'entities/pagination'
 
+import { $filteredUserList, filteredList } from '../model'
+
 interface IPagination {
-	list: Array<any>
 	rangeViewer: number
 	filterSign: string
 }
 
-export const Pagination: FC<IPagination> = ({ list, rangeViewer, filterSign }) => {
-	const filter = (props: string) => {
-		if (props !== 'all') return list.filter(el => el.status === props)
-		return list
-	}
-	const [filteringList, setFilteringList] = useState(filter('all'))
+export const Pagination: FC<IPagination> = ({ rangeViewer, filterSign }) => {
+	const userList = useStore($filteredUserList)
 
 	useEffect(() => {
-		setFilteringList(filter(filterSign))
+		filteredList(filterSign)
 	}, [filterSign])
 
 	return (
 		<div className='pagination'>
-			<PaginationList list={filteringList} rangeViewer={rangeViewer} />
+			<PaginationList rangeViewer={rangeViewer}>
+				{userList.map(({ status, description, name }) => (
+					<li className='pagination__list-element' key={name + Math.floor(Math.random() * 1000)}>
+						<UserList information={description} status={status} fullName={name} />
+					</li>
+				))}
+			</PaginationList>
 		</div>
 	)
 }
