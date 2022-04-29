@@ -15,24 +15,25 @@ type RouterTypes = {
 	title: string
 }
 
+const routerElements: Array<RouterTypes> = [
+	{
+		endpoint: SCREENS.USERS,
+		icon: <Users />,
+		title: 'Участники',
+	},
+	{
+		endpoint: SCREENS.REVIEWS,
+		icon: <Chat />,
+		title: 'Отзывы',
+	},
+	{
+		endpoint: SCREENS.PROFILE,
+		icon: <Paper />,
+		title: 'Обо мне',
+	},
+]
+
 export const NavBar: FC = () => {
-	const routerElements: Array<RouterTypes> = [
-		{
-			endpoint: SCREENS.USERS,
-			icon: <Users />,
-			title: 'Участники',
-		},
-		{
-			endpoint: SCREENS.REVIEWS,
-			icon: <Chat />,
-			title: 'Отзывы',
-		},
-		{
-			endpoint: SCREENS.PROFILE,
-			icon: <Paper />,
-			title: 'Обо мне',
-		},
-	]
 	return (
 		<nav className='aside-router'>
 			{routerElements.map(router => (

@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useStore } from 'effector-react'
 
 import { $isAuthenticated, SCREENS } from 'shared/lib'
-import { NavBar } from 'features/Navbar'
+import { NavBar } from 'features/navbar'
 
 const SignInPage = lazy(() => import('pages/auth/sign-in'))
 const RecoveryPasswordPage = lazy(() => import('pages/auth/recovery-password'))

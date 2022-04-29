@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { useStore } from 'effector-react'
+import { useNavigate } from 'react-router-dom'
 
 import { Container } from 'shared/ui/atoms/container'
 import { UserViewer } from 'shared/ui/molecules/user-viewer'
@@ -17,7 +18,13 @@ interface IHeader {
 }
 
 export const Header: FC<IHeader> = ({ type }) => {
+	const navigate = useNavigate()
 	const isMobileWidth = useStore($isMobileWidth)
+
+	const goToAdminPanel = () => {
+		navigate(SCREENS.USERS)
+	}
+
 	return (
 		<header className={`header header--${type}`}>
 			<Container>
@@ -31,7 +38,9 @@ export const Header: FC<IHeader> = ({ type }) => {
 							/>
 							<Logo />
 							<RouterLink to={SCREENS.USERS} classname=''>
-								<Button.Dark>{isMobileWidth ? <MobileProfile /> : 'Панель управления'}</Button.Dark>
+								<Button.Dark onClickHandler={goToAdminPanel}>
+									{isMobileWidth ? <MobileProfile /> : 'Панель управления'}
+								</Button.Dark>
 							</RouterLink>
 						</>
 					) : (
