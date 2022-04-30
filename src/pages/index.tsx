@@ -2,7 +2,8 @@ import { FC, lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { useStore } from 'effector-react'
 
-import { $isAuthenticated, SCREENS } from 'shared/lib'
+import { SCREENS } from 'shared/lib'
+import { AuthModel } from 'features/auth/by-email'
 import { NavBar } from 'features/navbar'
 
 const SignInPage = lazy(() => import('pages/auth/sign-in'))
@@ -15,12 +16,13 @@ const ReviewsPage = lazy(() => import('pages/reviews'))
 const ProfilePage = lazy(() => import('pages/profile'))
 
 export const Router: FC = () => {
-	const isAuthenticated = useStore($isAuthenticated)
+	const isAuthenticated = useStore(AuthModel.$isAuthenticated)
 	if (isAuthenticated) {
 		return (
 			<Routes>
 				<Route path={SCREENS.LANDING} element={<LandingPage />} />
 				<Route path={SCREENS.MAIN} element={<AdminPanelContainer navbar={<NavBar />} />}>
+					<Route path={SCREENS.MAIN} element={<Navigate to={SCREENS.USERS} />} />
 					<Route path={SCREENS.USERS} element={<UserPage />} />
 					<Route path={SCREENS.REVIEWS} element={<ReviewsPage />} />
 					<Route path={SCREENS.PROFILE} element={<ProfilePage />} />

@@ -50,6 +50,10 @@
 
     @media (max-width: $md3) {
       width: 100%;
+
+      & button:after {
+        height: 42px;
+      }
     }
 
     & button:first-child {

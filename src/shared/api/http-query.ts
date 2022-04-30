@@ -2,18 +2,23 @@ import { BASE_URL } from 'shared/config'
 import { Types } from 'shared/lib'
 
 export const login = async (email: string, password: string): Promise<string> => {
-	const request = await fetch(`${BASE_URL}user/signIn`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-		body: JSON.stringify({
-			email,
-			password,
-		}),
-	})
-	const { accessToken }: Types.AuthType = await request.json()
-	return accessToken
+	try {
+		const request = await fetch(`${BASE_URL}user/signIn`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email,
+				password,
+			}),
+		})
+		const res = await request.json()
+		if (!request.ok) throw Error(res.message)
+		return res.accessToken
+	} catch (e: any) {
+		throw Error(e.message)
+	}
 }
 
 export const getMyProfile = async (): Promise<Types.MyProfileType> => {

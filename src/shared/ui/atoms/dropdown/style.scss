@@ -16,6 +16,7 @@
 .dropdown {
 
   &__control {
+    cursor: pointer !important;
     width: 100% !important;
     height: 52px;
     border-color: $lightGrey !important;

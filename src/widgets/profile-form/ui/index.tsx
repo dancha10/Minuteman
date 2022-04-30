@@ -12,27 +12,10 @@ import { useNotification } from 'entities/notification'
 
 import { validationFields } from '../lib/validationFields'
 import { ReactComponent as Edit } from '../lib/edit.svg'
+import { optionCity, optionSex, optionPets } from '../lib/options'
 import { $fieldsForm, IProfileFormFields, setFieldsForm } from '../model/form'
 
 import './style.scss'
-
-const optionCity = [
-	{ value: 'Томск', label: 'Томск' },
-	{ value: 'Кемерово', label: 'Кемерово' },
-	{ value: 'Анжеро-Судженск', label: 'Анжеро-Судженск' },
-	{ value: 'Москва', label: 'Москва' },
-	{ value: 'Расчлененград', label: 'Санкт-Петербург' },
-]
-
-const optionSex = [
-	{ value: 'Мужчина', label: 'Мужчина' },
-	{ value: 'Женщина', label: 'Женщина' },
-]
-
-const optionPets = [
-	{ value: 'Есть', label: 'Есть' },
-	{ value: 'Нет', label: 'Нет' },
-]
 
 const imageAvatar = 'https://www.meme-arsenal.com/memes/307290bf13f66c6a976fcf56d32cad21.jpg' // типо приходит с бэка
 
@@ -43,6 +26,7 @@ export const ProfileForm: FC = () => {
 		control,
 		formState: { errors },
 	} = useForm<IProfileFormFields>({ mode: 'onChange' })
+
 	const [isEditMode, setIsEditMode] = useState<boolean>(false)
 	const avatarUploadRef = useRef<HTMLInputElement>(null)
 

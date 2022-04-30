@@ -77,11 +77,16 @@
     }
 
     &:first-child.aside-router__viewer--active:before {
-      right: 15px;
+      @media (max-width: $md3) {
+        right: 15px;
+      }
+
     }
 
     &:last-child.aside-router__viewer--active:before {
-      right: -15px;
+      @media (max-width: $md3) {
+        right: -15px;
+      }
     }
   }
 
