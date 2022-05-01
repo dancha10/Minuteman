@@ -53,6 +53,7 @@ export interface MyProfileType {
 }
 
 export interface ListReviewsType {
+	createdAt: string
 	id: string
 	version: 1
 	authorImage: string | null
@@ -65,4 +66,9 @@ export interface ListReviewsType {
 export interface CaptchaType {
 	base64Image: string
 	key: string
+}
+
+export interface UploadType {
+	id: string
+	authorImage: FormData
 }

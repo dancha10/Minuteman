@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { useStore } from 'effector-react'
 
@@ -6,20 +6,24 @@ import { Avatar } from 'shared/ui/atoms/avatar'
 import { UploadFile } from 'features/upload-file'
 import { Button } from 'shared/ui/atoms/button'
 import { Input } from 'shared/ui/atoms/input'
+import { CubeLoader } from 'shared/ui/atoms/cube-loader'
 import { Dropdown } from 'shared/ui/atoms/dropdown'
 import { Textarea } from 'shared/ui/atoms/textarea'
 import { useNotification } from 'entities/notification'
+import { localeDateString } from 'shared/lib'
 
 import { validationFields } from '../lib/validationFields'
 import { ReactComponent as Edit } from '../lib/edit.svg'
 import { optionCity, optionSex, optionPets } from '../lib/options'
-import { $fieldsForm, IProfileFormFields, setFieldsForm } from '../model/form'
+import { $profileData, getProfileData, IProfileFormFields, profileDataFx, setFieldsForm } from '../model/form'
 
 import './style.scss'
 
-const imageAvatar = 'https://www.meme-arsenal.com/memes/307290bf13f66c6a976fcf56d32cad21.jpg' // типо приходит с бэка
-
 export const ProfileForm: FC = () => {
+	useEffect(() => {
+		getProfileData()
+	}, [])
+
 	const {
 		register,
 		handleSubmit,
@@ -39,17 +43,19 @@ export const ProfileForm: FC = () => {
 		setIsEditMode(false)
 	}
 
-	const fields = useStore($fieldsForm)
+	const profile = useStore($profileData)
+	const isLoading = useStore(profileDataFx.pending)
 
 	return (
 		<form className='profile-form' onSubmit={handleSubmit(onSubmit)}>
+			{isLoading && <CubeLoader isFull />}
 			<div className='profile-form__header'>
 				<div className='profile-form__photo'>
 					<div className='profile-form__photo-wrapper'>
-						<Avatar image={imageAvatar} />
+						<Avatar image={`https://academtest.ilink.dev/images/${profile.profileImage}`} />
 						<div className='profile-form__photo-preview'>
 							<div className='profile-form__photo-overlay'>
-								<img src={imageAvatar} alt='avatar-preview' />
+								<img src={`https://academtest.ilink.dev/images/${profile.profileImage}`} alt='avatar-preview' />
 							</div>
 						</div>
 					</div>
@@ -80,7 +86,7 @@ export const ProfileForm: FC = () => {
 						validation={{ ...register('firsName', validationFields.firstName) }}
 						isError={!!errors.firsName?.message}
 						errorMessage={errors.firsName?.message}
-						value={fields.firsName}
+						value={profile?.firstName}
 					/>
 				</div>
 				<div className='profile-form__input-wrapper'>
@@ -93,7 +99,7 @@ export const ProfileForm: FC = () => {
 						validation={{ ...register('lastName', validationFields.lastName) }}
 						isError={!!errors.lastName?.message}
 						errorMessage={errors.lastName?.message}
-						value={fields.lastName}
+						value={profile?.lastName}
 					/>
 				</div>
 				<div className='profile-form__input-wrapper'>
@@ -106,16 +112,19 @@ export const ProfileForm: FC = () => {
 						validation={{ ...register('dateOfBirth', validationFields.dateOfBirth) }}
 						isError={!!errors.dateOfBirth?.message}
 						errorMessage={errors.dateOfBirth?.message}
-						value={fields.dateOfBirth}
+						value={localeDateString(profile?.birthDate)}
 					/>
 				</div>
 			</div>
 			<div className='profile-form__dropdown-list'>
 				<div className='profile-form__dropdown-wrapper'>
 					<Controller
+						control={control}
+						name='city'
+						defaultValue={profile.cityOfResidence}
 						render={({ field }) => (
 							<Dropdown
-								fields={field}
+								fields={{ ...field }}
 								options={optionCity}
 								placeholder='Город'
 								label='Город'
@@ -123,13 +132,13 @@ export const ProfileForm: FC = () => {
 								isDisabled={!isEditMode}
 							/>
 						)}
-						defaultValue={fields.city}
-						name='city'
-						control={control}
 					/>
 				</div>
 				<div className='profile-form__dropdown-wrapper'>
 					<Controller
+						control={control}
+						name='sex'
+						defaultValue={profile?.gender}
 						render={({ field }) => (
 							<Dropdown
 								fields={field}
@@ -140,13 +149,13 @@ export const ProfileForm: FC = () => {
 								isDisabled={!isEditMode}
 							/>
 						)}
-						defaultValue={fields.sex}
-						name='sex'
-						control={control}
 					/>
 				</div>
 				<div className='profile-form__dropdown-wrapper'>
 					<Controller
+						control={control}
+						name='pet'
+						defaultValue='Mda'
 						render={({ field }) => (
 							<Dropdown
 								fields={field}
@@ -157,9 +166,6 @@ export const ProfileForm: FC = () => {
 								isDisabled={!isEditMode}
 							/>
 						)}
-						defaultValue={fields.pet}
-						name='pet'
-						control={control}
 					/>
 				</div>
 			</div>
@@ -172,7 +178,7 @@ export const ProfileForm: FC = () => {
 					label='Краткая информация'
 					isVisibleCounter={isEditMode}
 					disabled={!isEditMode}
-					value={fields.shortInfo}
+					value={profile?.smallAboutMe!}
 				/>
 			</div>
 			<div className='profile-form__textarea-wrapper profile-form__textarea-wrapper--about'>
@@ -184,7 +190,7 @@ export const ProfileForm: FC = () => {
 					label='О себе'
 					isVisibleCounter={isEditMode}
 					disabled={!isEditMode}
-					value={fields.aboutMe}
+					value={profile?.aboutMe}
 				/>
 			</div>
 			<div className='profile-form__footer'>

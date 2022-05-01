@@ -1,4 +1,4 @@
-@import "../../../app/styles/variables";
+@import "src/app/styles/variables";
 
 .review-model {
   // .review-model__header
@@ -156,6 +156,47 @@
       }
     }
   }
+
+  // .review-model__footer
+  &__footer {
+    margin-top: 32px;
+  }
+
+  // .review-model__captcha-field
+  &__captcha-area {
+    display: flex;
+    justify-content: space-between;
+
+    & input {
+      width: 383px;
+    }
+  }
+
+
+  // .review-model__captcha
+  &__captcha {
+    width: 165px;
+    height: 52px;
+
+    & img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__captcha-loading {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+
+  // .review-model__reset-captcha
+  &__reset-captcha {
+    width: 48px;
+    background: #F5F5F5;
+    border-radius: 2px;
+  }
+
 
   // .review-model__information
   &__information {

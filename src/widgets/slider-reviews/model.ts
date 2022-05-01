@@ -1,12 +1,18 @@
-import { createStore } from 'effector'
+import { createStore, createEffect, createEvent, sample } from 'effector'
 
-import { SendingReviewModel } from 'features/sending-review'
 import { Types } from 'shared/lib'
-import { userReviews } from 'widgets/slider-reviews/lib/mocha'
+import { getReviews } from 'shared/api'
 
-export const $userReviews = createStore<Array<Types.IUserReview>>(userReviews).on(
-	SendingReviewModel.sentReview,
-	(reviews, newPost) => [...reviews, newPost]
+export const getSliderReviews = createEvent()
+
+export const sliderReviewsFx = createEffect<void, Types.ListReviewsType[], Error>(async () => await getReviews())
+
+export const $userReviews = createStore<Types.ListReviewsType[]>([]).on(
+	sliderReviewsFx.doneData,
+	(_, reviews) => reviews
 )
 
-$userReviews.watch(el => console.log(el))
+sample({
+	clock: getSliderReviews,
+	target: sliderReviewsFx,
+})

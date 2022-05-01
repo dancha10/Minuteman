@@ -3,7 +3,6 @@ import classNames from 'classnames'
 
 import { Button } from 'shared/ui/atoms/button'
 import { IUserComment, UserComment } from 'shared/ui/molecules/user-comment'
-import { Types } from 'shared/lib'
 
 import { ReactComponent as Edit } from '../lib/edit.svg'
 import { ReactComponent as Check } from '../lib/check.svg'
@@ -12,7 +11,7 @@ import { ReactComponent as Cross } from '../lib/cross.svg'
 import './style.scss'
 
 interface ICommentPanel extends IUserComment {
-	status: Types.IUserReview['status']
+	status: string
 	handlerModal: (reviewText: string) => void
 }
 

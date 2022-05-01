@@ -11,7 +11,7 @@ export interface IAuthFormFields {
 
 export const sentAuthForm = createEvent<IAuthFormFields>()
 
-const authFx = createEffect<IAuthFormFields, string, Error>(async ({ email, password }) => {
+export const authFx = createEffect<IAuthFormFields, string, Error>(async ({ email, password }) => {
 	return await login(email, password)
 })
 

@@ -32,7 +32,7 @@ const UsersPage: FC = () => {
 					<p className='user-list__status'>СТАТУС</p>
 				</div>
 				<div className='user-list__list'>
-					<Pagination list={users} rangeViewer={6} filterSign={status} />
+					<Pagination rangeViewer={6} filterSign={status} />
 				</div>
 			</div>
 		</div>

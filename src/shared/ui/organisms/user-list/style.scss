@@ -3,15 +3,16 @@
 .list-user {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
   height: 88px;
   padding: 24px;
   @media (max-width: $md3) {
-    width: 200%;
+    width: 600px;
   }
   // .user-list__presentation
   &__presentation {
+    margin-right: 140px;
     width: 274px;
 
     & .avatar {
@@ -25,6 +26,16 @@
       line-height: 17px;
       color: #464E5F;
       margin-left: 12px;
+    }
+  }
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: $md3) {
+      // overflow-x: auto;
     }
   }
 

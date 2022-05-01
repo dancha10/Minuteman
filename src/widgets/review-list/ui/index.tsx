@@ -1,28 +1,39 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useStore } from 'effector-react'
 
 import { Empty } from 'shared/ui/atoms/empty'
 import { ControlComments } from 'features/action-bar'
 import { ReviewEditModel } from 'widgets/review-edit' // временно
+import { localeDateString } from 'shared/lib'
+import { Skeleton } from 'shared/ui/atoms/skeleton'
 
-import { $sortReviews } from '../model/reviewsSort'
+import { $sortReviews, getReviewsList, reviewsFx } from '../model/reviewsSort'
 
 import './style.scss'
 
 export const ReviewList: FC = () => {
+	useEffect(() => {
+		getReviewsList()
+	}, [])
+
+	const isLoading = useStore(reviewsFx.pending)
 	const reviews = useStore($sortReviews)
+
 	return (
 		<div className='review-list'>
 			{reviews ? (
 				reviews.map(review => (
-					<div className='review-list__item' key={review.fullName}>
-						<ControlComments
-							status={review.status}
-							review={review.review}
-							name={review.fullName}
-							dateOfPost={review.dateOfPost}
-							handlerModal={ReviewEditModel.getCurrentReview}
-						/>
+					<div className='review-list__item' key={review.id}>
+						<Skeleton isLoading={isLoading} height='363px' width='520px'>
+							<ControlComments
+								status={review.status}
+								review={review.text}
+								name={review.authorName}
+								dateOfPost={localeDateString(review.createdAt)}
+								handlerModal={ReviewEditModel.getCurrentReview}
+								image={review.authorImage ? `https://academtest.ilink.dev/images/${review.authorImage}` : null}
+							/>
+						</Skeleton>
 					</div>
 				))
 			) : (

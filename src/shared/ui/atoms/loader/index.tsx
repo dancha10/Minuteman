@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import './style.scss'
 
-interface ILoading {
+export interface ILoading {
 	isFull?: boolean
 }
 

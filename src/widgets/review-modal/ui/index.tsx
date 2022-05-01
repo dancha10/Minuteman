@@ -1,13 +1,12 @@
-import { FC, useRef } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import { useStore } from 'effector-react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { SendingReview, SendingReviewModel } from 'features/sending-review'
 import { UploadFile, UploadFileModel } from 'features/upload-file'
 import { ToggleModal, ToggleModel } from 'features/toggle-modal'
-import { useNotification } from 'entities/notification'
 import { Modal } from 'shared/ui/atoms/modal'
 import { Input } from 'shared/ui/atoms/input'
+import { CubeLoader } from 'shared/ui/atoms/cube-loader'
 import { Textarea } from 'shared/ui/atoms/textarea'
 import { FilePreview } from 'shared/ui/molecules/file-preview'
 import { Button } from 'shared/ui/atoms/button'
@@ -16,45 +15,30 @@ import { resetStores } from 'features/upload-file/model'
 import { ReactComponent as Information } from '../lib/info.svg'
 import { ReactComponent as Cross } from '../lib/cross.svg'
 import { ReactComponent as Delete } from '../lib/delete.svg'
+import { ReactComponent as Reload } from '../lib/reload.svg'
 import { detailedReviewValidator, fullNameValidator } from '../lib/validator'
+import { $captcha, createdReview, resetCaptcha, resetCaptchaFx, uploadPhoto } from '../model'
 
 import './style.scss'
 
 interface IReviewModalInputs {
 	fullName: string
 	detailedReview: string
+	captcha: string
 }
 
-export const ReviewModel: FC = () => {
+export const ReviewModal: FC = () => {
 	const isOpen = useStore(ToggleModel.$isOpen)
 	const uploadedImage = useStore(UploadFileModel.$uploadImage)
 	const fileName = useStore(UploadFileModel.$fileName)
 	const errorMessage = useStore(UploadFileModel.$errorMessage)
 	const percentLoading = useStore(UploadFileModel.$percentLoading)
+	const captcha = useStore($captcha)
+	const isLoadingCaptcha = useStore(resetCaptchaFx.pending)
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		reset,
-	} = useForm<IReviewModalInputs>()
-
-	const notify = useNotification()
-
-	const onSubmit: SubmitHandler<IReviewModalInputs> = data => {
-		SendingReviewModel.sentReview({
-			avatar: uploadedImage,
-			fullName: data.fullName,
-			review: data.detailedReview,
-			dateOfPost: SendingReviewModel.localeDateString(),
-		})
-		ToggleModel.clickedButton()
-		notify('success', 'Успешно!', 'Спасибо за отзыв о нашей компании :)')
-		deleteFile()
-		reset()
-	}
-
-	const fileRef = useRef<HTMLInputElement>(null)
+	useEffect(() => {
+		reloadCaptcha()
+	}, [])
 
 	const deleteFile = (): void => {
 		UploadFileModel.resetStores()
@@ -66,6 +50,37 @@ export const ReviewModel: FC = () => {
 	const clickButton = () => {
 		fileRef?.current?.click()
 		resetStores()
+	}
+
+	const reloadCaptcha = () => {
+		resetCaptcha()
+	}
+
+	const fileRef = useRef<HTMLInputElement>(null)
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm<IReviewModalInputs>()
+
+	const onSubmit: SubmitHandler<IReviewModalInputs> = fields => {
+		createdReview({
+			authorName: fields.fullName,
+			text: fields.detailedReview,
+			title: 'title',
+			captchaValue: fields.captcha,
+			captchaKey: captcha.key,
+		})
+
+		if (uploadedImage) {
+			const formData = new FormData()
+			formData.set('authorImage', fileRef.current?.files?.[0]!)
+			uploadPhoto(formData)
+		}
+
+		/* deleteFile() */
 	}
 
 	return (
@@ -109,7 +124,6 @@ export const ReviewModel: FC = () => {
 							/>
 						</div>
 					)}
-
 					<div className='review-model__textarea'>
 						<p className='review-model__label'>Все ли вам понравилось?</p>
 						<Textarea
@@ -125,8 +139,26 @@ export const ReviewModel: FC = () => {
 							</div>
 						)}
 					</div>
+					<div className='review-model__footer'>
+						<p className='review-model__label'>Введите код с картинки: </p>
+						<div className='review-model__captcha-area'>
+							<Input.Simple placeholder='0000' isError={false} validation={{ ...register('captcha') }} />
+							<div className='review-model__captcha'>
+								{isLoadingCaptcha ? (
+									<div className='review-model__captcha-loading'>
+										<CubeLoader />
+									</div>
+								) : (
+									<img src={captcha?.base64Image} alt='captcha' />
+								)}
+							</div>
+							<button type='button' onClick={reloadCaptcha} className='review-model__reset-captcha'>
+								<Reload />
+							</button>
+						</div>
+					</div>
 					<div className='review-model__submit'>
-						<SendingReview />
+						<Button.Dark type='submit'>Отправить отзыв</Button.Dark>
 						<div className='review-model__information'>
 							<Information />
 							<span>Все отзывы проходят модерацию в течение 2 часов</span>

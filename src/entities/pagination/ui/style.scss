@@ -3,6 +3,7 @@
 .pagination {
 
   &__list {
+    overflow-x: auto;
     min-height: 533px;
   }
 

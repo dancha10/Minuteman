@@ -1,6 +1,9 @@
 import { createEffect, createEvent, sample } from 'effector'
 
 import { AuthModel } from 'features/auth/by-email'
+import { ReviewModel } from 'widgets/review-modal'
+import { ProfileFormModel } from 'widgets/profile-form'
+import { ReviewListModel } from 'widgets/review-list'
 
 export const checkedAuth = createEvent()
 
@@ -15,4 +18,16 @@ sample({
 	clock: checkAuthFx.doneData,
 	fn: token => !!token,
 	target: AuthModel.$isAuthenticated,
+})
+
+const clearLocalStorageFx = createEffect(() => localStorage.removeItem('@token'))
+
+sample({
+	clock: [
+		ReviewModel.createReviewFx.failData,
+		ProfileFormModel.profileDataFx.failData,
+		ReviewListModel.reviewsFx.failData,
+	],
+	filter: error => error.message === 'Unauthorized',
+	target: clearLocalStorageFx,
 })

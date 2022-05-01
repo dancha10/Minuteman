@@ -1,30 +1,28 @@
 import { BASE_URL } from 'shared/config'
 import { Types } from 'shared/lib'
 
+// НЕ стал оборачивать все в try/catch т.к. эффектор и без этого сможет отловить ошибку
+
 export const login = async (email: string, password: string): Promise<string> => {
-	try {
-		const request = await fetch(`${BASE_URL}user/signIn`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email,
-				password,
-			}),
-		})
-		const res = await request.json()
-		if (!request.ok) throw Error(res.message)
-		return res.accessToken
-	} catch (e: any) {
-		throw Error(e.message)
-	}
+	const request = await fetch(`${BASE_URL}user/signIn`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			email,
+			password,
+		}),
+	})
+	const res = await request.json()
+	if (!request.ok) throw Error(res.message)
+	return res.accessToken
 }
 
 export const getMyProfile = async (): Promise<Types.MyProfileType> => {
 	const request = await fetch(`${BASE_URL}user/getUserProfile`, {
 		headers: {
-			authorization: localStorage.getItem('@token')!,
+			Authorization: `Bearer ${JSON.parse(localStorage.getItem('@token')!)}`,
 		},
 	})
 	return await request.json()
@@ -33,15 +31,19 @@ export const getMyProfile = async (): Promise<Types.MyProfileType> => {
 export const getReviews = async (): Promise<Types.ListReviewsType[]> => {
 	const request = await fetch(`${BASE_URL}reviews/getAll`, {
 		headers: {
-			authorization: localStorage.getItem('@token')!,
+			Authorization: `Bearer ${JSON.parse(localStorage.getItem('@token')!)}`,
 		},
 	})
-	return await request.json()
+	const response = await request.json()
+	if (!request.ok) throw Error(response.message)
+	return response
 }
 
 export const getCaptcha = async (): Promise<Types.CaptchaType> => {
 	const request = await fetch(`${BASE_URL}reviews/getCaptcha`)
-	return await request.json()
+	const response = await request.json()
+	if (!request.ok) throw Error(response.message)
+	return response
 }
 
 export const createReviews = async (
@@ -50,12 +52,12 @@ export const createReviews = async (
 	text: string,
 	captchaKey: string,
 	captchaValue: string
-): Promise<any> => {
+): Promise<Types.ListReviewsType> => {
 	const request = await fetch(`${BASE_URL}reviews/create`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			authorization: localStorage.getItem('@token')!,
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${JSON.parse(localStorage.getItem('@token')!)}`,
 		},
 		body: JSON.stringify({
 			authorName,
@@ -65,5 +67,17 @@ export const createReviews = async (
 			captchaValue,
 		}),
 	})
-	return await request.json()
+	const response = await request.json()
+	if (!request.ok) throw Error(response.message)
+	return response
+}
+
+export const updatePhoto = async (id: string, body: FormData) => {
+	const request = await fetch(`${BASE_URL}reviews/updatePhoto/${id}`, {
+		method: 'POST',
+		body,
+	})
+	const response = await request.json()
+	if (!request.ok) throw Error(response.message)
+	return response
 }

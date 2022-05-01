@@ -3,7 +3,7 @@ import { useGate } from 'effector-react'
 
 import { Header } from 'shared/ui/organisms/header'
 import { Footer } from 'shared/ui/organisms/footer'
-import { ReviewModel } from 'widgets/review-modal'
+import { ReviewModal } from 'widgets/review-modal'
 import { SliderReviews } from 'widgets/slider-reviews'
 import { NotificationWrapper } from 'entities/notification'
 import { Avatar } from 'shared/ui/atoms/avatar'
@@ -39,7 +39,7 @@ const MainPage: FC = () => {
 			<div className='main-page__reviews'>
 				<SliderReviews />
 			</div>
-			<ReviewModel />
+			<ReviewModal />
 			<NotificationWrapper />
 			<Footer />
 		</div>

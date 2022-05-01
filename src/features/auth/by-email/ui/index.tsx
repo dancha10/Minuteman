@@ -2,12 +2,13 @@ import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useStore } from 'effector-react'
 
+import { CubeLoader } from 'shared/ui/atoms/cube-loader'
 import { Button } from 'shared/ui/atoms/button'
 import { Input } from 'shared/ui/atoms/input'
 import { authValidation } from 'shared/lib'
 import { ErrorModel } from 'entities/error'
 
-import { IAuthFormFields, sentAuthForm } from '../model'
+import { authFx, IAuthFormFields, sentAuthForm } from '../model'
 
 import './style.scss'
 
@@ -23,11 +24,14 @@ export const AuthFormByEmail: FC = () => {
 		sentAuthForm(data)
 	}
 
+	const isLoading = useStore(authFx.pending)
+
 	// const disabledButton = (): boolean => !!isErrorToServer || !getValues('login') || !getValues('password')
 
 	const isErrorToServer = useStore(ErrorModel.$errorMessage)
 	return (
 		<form className='auth-form' id='login-form' onSubmit={handleSubmit(onSubmit)}>
+			{isLoading && <CubeLoader isFull />}
 			<div className='auth-form__field'>
 				<Input.Modified
 					validation={{ ...register('email', authValidation.email) }}

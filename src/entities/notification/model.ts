@@ -2,7 +2,7 @@ import { createEvent, createStore, sample } from 'effector'
 import { debounce } from 'patronum/debounce'
 
 export interface INotification {
-	type: 'success' | 'error'
+	type: string
 	title: string
 	message: string
 }

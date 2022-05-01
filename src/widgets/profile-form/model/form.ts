@@ -1,4 +1,7 @@
-import { createEvent, createStore } from 'effector'
+import { createEffect, createEvent, createStore, restore, sample } from 'effector'
+
+import { Types } from 'shared/lib'
+import { getMyProfile } from 'shared/api'
 
 export interface IProfileFormFields {
 	firsName: string
@@ -13,16 +16,27 @@ export interface IProfileFormFields {
 
 export const setFieldsForm = createEvent<IProfileFormFields>()
 
-// Якобы отправили данные на бэк
-export const $fieldsForm = createStore<IProfileFormFields>({
-	firsName: 'Данил',
-	lastName: 'Абраменко',
-	dateOfBirth: '10.08.2001',
-	city: 'Москва',
-	sex: 'Мужской',
-	pet: 'Нет',
-	shortInfo: 'Big dick',
-	aboutMe: 'About me',
-}).on(setFieldsForm, (_, fields) => fields)
+export const getProfileData = createEvent()
 
-$fieldsForm.watch(el => console.log(el))
+export const profileDataFx = createEffect<void, Types.MyProfileType, Error>(async () => await getMyProfile())
+
+export const $profileData = restore<Types.MyProfileType>(profileDataFx.doneData, {
+	firstName: '',
+	lastName: '',
+	profileImage: '',
+	birthDate: '',
+	gender: 'male',
+	cityOfResidence: '',
+	favoriteFood: '',
+	hasPet: false,
+	petType: '',
+	petName: '',
+	aboutMe: '',
+	smallAboutMe: '',
+	academyStatus: 'studies',
+})
+
+sample({
+	clock: getProfileData,
+	target: profileDataFx,
+})

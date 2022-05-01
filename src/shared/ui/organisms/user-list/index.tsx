@@ -28,8 +28,12 @@ export const UserList: FC<IUserList> = ({ fullName, image, information, status }
 			<div className='list-user__presentation'>
 				<UserViewer fullName={fullName} image={image} />
 			</div>
-			<div className='list-user__information'>{information}</div>
-			<div className='list-user__status'>{chooseStatus(status)}</div>
+			<div>
+				<div className='list-user__wrapper'>
+					<div className='list-user__information'>{information}</div>
+					<div className='list-user__status'>{chooseStatus(status)}</div>
+				</div>
+			</div>
 		</div>
 	)
 }
