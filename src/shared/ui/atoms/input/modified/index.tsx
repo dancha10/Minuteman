@@ -13,7 +13,7 @@ interface IInputModified extends Types.IInput {
 	label: string
 	errorMessage?: string
 	id: string
-	value?: string
+	maxLength?: number
 }
 
 export const Modified: FC<IInputModified> = ({
@@ -25,7 +25,10 @@ export const Modified: FC<IInputModified> = ({
 	errorMessage,
 	validation,
 	disabled,
+	onChange,
+	defaultValue,
 	value,
+	maxLength,
 }) => {
 	const [isVisibleContent, setIsVisibleContent] = useState<boolean>(type === 'text')
 	const [isActive, setIsActive] = useState(false)
@@ -44,10 +47,14 @@ export const Modified: FC<IInputModified> = ({
 					data-is-active={isActive}
 					data-is-error={isError}
 					id={id}
-					onInput={event => changedActive(event.currentTarget.value)}
+					onInput={event => {
+						changedActive(event.currentTarget.value)
+						onChange && onChange(event.currentTarget.value)
+					}}
+					maxLength={maxLength}
 					disabled={disabled}
-					defaultValue={value}
-
+					value={value}
+					defaultValue={defaultValue}
 					// TODO режим onChange mode из react-hook-form конфликтует с onChange инпута чтоб навешивать active-классы
 				/>
 				<div className='input-field__assistants-area'>

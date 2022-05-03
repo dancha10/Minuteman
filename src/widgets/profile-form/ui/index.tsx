@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { useStore } from 'effector-react'
 
@@ -24,27 +24,42 @@ export const ProfileForm: FC = () => {
 		getProfileData()
 	}, [])
 
+	const profile = useStore($profileData)
+	const isLoading = useStore(profileDataFx.pending)
+
+	const [inputDateValue, setInputDateValue] = useState('')
+	const [isEditMode, setIsEditMode] = useState<boolean>(false)
+	const avatarUploadRef = useRef<HTMLInputElement>(null)
+
+	const maskDate = (value: string) => {
+		const dateString = value.replace(/\D/g, '').slice(0, 10)
+		if (dateString.length >= 5) {
+			return setInputDateValue(`${dateString.slice(0, 2)}.${dateString.slice(2, 4)}.${dateString.slice(4)}`)
+		}
+		if (dateString.length >= 3) {
+			return setInputDateValue(`${dateString.slice(0, 2)}.${dateString.slice(2)}`)
+		}
+		return setInputDateValue(dateString)
+	}
+
+	useEffect(() => {
+		maskDate(localeDateString(profile.birthDate))
+	}, [profile.birthDate])
+
+	const notify = useNotification()
+
+	const onSubmit: SubmitHandler<IProfileFormFields> = data => {
+		setFieldsForm(data)
+		notify('success', 'Сохранено', 'Данные успешно отредактированы!')
+		setIsEditMode(false)
+	}
+
 	const {
 		register,
 		handleSubmit,
 		control,
 		formState: { errors },
 	} = useForm<IProfileFormFields>({ mode: 'onChange' })
-
-	const [isEditMode, setIsEditMode] = useState<boolean>(false)
-	const avatarUploadRef = useRef<HTMLInputElement>(null)
-
-	const notify = useNotification()
-
-	const onSubmit: SubmitHandler<IProfileFormFields> = data => {
-		console.log(data)
-		setFieldsForm(data)
-		notify('success', 'Сохранено', 'Данные успешно отредактированы!')
-		setIsEditMode(false)
-	}
-
-	const profile = useStore($profileData)
-	const isLoading = useStore(profileDataFx.pending)
 
 	return (
 		<form className='profile-form' onSubmit={handleSubmit(onSubmit)}>
@@ -86,7 +101,7 @@ export const ProfileForm: FC = () => {
 						validation={{ ...register('firsName', validationFields.firstName) }}
 						isError={!!errors.firsName?.message}
 						errorMessage={errors.firsName?.message}
-						value={profile?.firstName}
+						defaultValue={profile?.firstName}
 					/>
 				</div>
 				<div className='profile-form__input-wrapper'>
@@ -99,7 +114,7 @@ export const ProfileForm: FC = () => {
 						validation={{ ...register('lastName', validationFields.lastName) }}
 						isError={!!errors.lastName?.message}
 						errorMessage={errors.lastName?.message}
-						value={profile?.lastName}
+						defaultValue={profile?.lastName}
 					/>
 				</div>
 				<div className='profile-form__input-wrapper'>
@@ -112,7 +127,9 @@ export const ProfileForm: FC = () => {
 						validation={{ ...register('dateOfBirth', validationFields.dateOfBirth) }}
 						isError={!!errors.dateOfBirth?.message}
 						errorMessage={errors.dateOfBirth?.message}
-						value={localeDateString(profile?.birthDate)}
+						value={inputDateValue}
+						onChange={maskDate}
+						maxLength={10}
 					/>
 				</div>
 			</div>

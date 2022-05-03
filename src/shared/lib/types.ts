@@ -16,7 +16,10 @@ export interface IInput {
 	placeholder: string
 	disabled?: boolean
 	validation?: object
-	isError: boolean
+	isError?: boolean
+	onChange?: (value: string) => void
+	defaultValue?: string
+	value?: string
 }
 
 export interface OptionProps {
