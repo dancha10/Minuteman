@@ -61,9 +61,10 @@ export const ProfileForm: FC = () => {
 		formState: { errors },
 	} = useForm<IProfileFormFields>({ mode: 'onChange' })
 
+	if (isLoading) return <CubeLoader isFull />
+
 	return (
 		<form className='profile-form' onSubmit={handleSubmit(onSubmit)}>
-			{isLoading && <CubeLoader isFull />}
 			<div className='profile-form__header'>
 				<div className='profile-form__photo'>
 					<div className='profile-form__photo-wrapper'>
