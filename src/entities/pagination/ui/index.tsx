@@ -1,7 +1,6 @@
 import { FC, ReactNode, useEffect } from 'react'
 import { useList, useStore } from 'effector-react'
 import Pagination from 'rc-pagination'
-import SkeletonLoading from 'react-loading-skeleton'
 
 import { UserList } from 'shared/ui/organisms/user-list'
 import { Skeleton } from 'shared/ui/atoms/skeleton'
@@ -64,7 +63,7 @@ export const UserPagination: FC<IPagination> = ({ rangeViewer }) => {
 				isLoading ? (
 					[...new Array(6)].map(() => (
 						<div className='pagination__skeleton'>
-							<SkeletonLoading height='41px' width='100%' />
+							<Skeleton height='41px' width='100%' isLoading={isLoading} />
 						</div>
 					))
 				) : (
