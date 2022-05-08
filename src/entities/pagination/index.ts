@@ -1,2 +1,2 @@
-export { PaginationList } from './ui'
-export * as PaginationModel from './model'
+export { UserPagination } from './ui'
+export * as UserPaginationModel from './model'

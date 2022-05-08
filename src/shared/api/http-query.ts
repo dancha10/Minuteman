@@ -81,3 +81,14 @@ export const updatePhoto = async (id: string, body: FormData) => {
 	if (!request.ok) throw Error(response.message)
 	return response
 }
+
+export const getUsersList = async (): Promise<Types.ListReviewsType[]> => {
+	const request = await fetch(`${BASE_URL}reviews/getAll`, {
+		headers: {
+			Authorization: `Bearer ${JSON.parse(localStorage.getItem('@token')!)}`,
+		},
+	})
+	const response = await request.json()
+	if (!request.ok) throw Error(response.message)
+	return response
+}

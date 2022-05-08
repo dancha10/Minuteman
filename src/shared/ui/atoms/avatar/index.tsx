@@ -5,7 +5,7 @@ import { ReactComponent as ProfileAvatar } from './camera.svg'
 import './style.scss'
 
 export interface IAvatar {
-	image: string | null
+	image?: string | null
 }
 
 export const Avatar: FC<IAvatar> = ({ image }) => {

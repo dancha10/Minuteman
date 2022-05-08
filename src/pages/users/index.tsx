@@ -1,8 +1,7 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
-import { Pagination } from 'widgets/pagination'
+import { UserPagination, UserPaginationModel } from 'entities/pagination'
 import { Dropdown } from 'shared/ui/atoms/dropdown'
-import { users } from 'shared/lib'
 
 import './style.scss'
 
@@ -14,8 +13,7 @@ const options: { value: string; label: string }[] = [
 ]
 
 const UsersPage: FC = () => {
-	const [status, setStatus] = useState<string>('all')
-	const onChangedDropdownOption = (props: string) => setStatus(props)
+	const onChangedDropdownOption = (props: string) => UserPaginationModel.filteredList(props)
 
 	return (
 		<div className='user-page'>
@@ -31,8 +29,8 @@ const UsersPage: FC = () => {
 					<p className='user-list__information'>КРАТКАЯ ИНФОРМАЦИЯ</p>
 					<p className='user-list__status'>СТАТУС</p>
 				</div>
-				<div className='user-list__list'>
-					<Pagination rangeViewer={6} filterSign={status} />
+				<div className='user-list__pagination'>
+					<UserPagination rangeViewer={6} />
 				</div>
 			</div>
 		</div>

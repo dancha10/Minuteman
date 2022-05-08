@@ -2,12 +2,26 @@
 
 .pagination {
 
+  &__skeleton {
+    height: 88px;
+    padding: 24px;
+
+    &:not(:last-child) {
+      border-bottom: 1px dashed $lightGrey;
+    }
+  }
+
+  & > span {
+    display: flex;
+    justify-content: center;
+  }
+
   &__list {
     overflow-x: auto;
     min-height: 533px;
   }
 
-  &__list-element {
+  &__list-item {
     &:not(:last-child) {
       border-bottom: 1px dashed $lightGrey;
     }
