@@ -22,9 +22,13 @@ export const ReviewList: FC = () => {
 	return (
 		<div className='review-list'>
 			{reviews ? (
-				reviews.map(review => (
-					<div className='review-list__item' key={review.id}>
-						<Skeleton isLoading={isLoading} height='363px' width='520px'>
+				12 ? (
+					[...new Array(4)].map((_, index) => (
+						<Skeleton isLoading={!!12} height='363px' width='520px' key={index} className='review-list__item' />
+					))
+				) : (
+					reviews.map(review => (
+						<div className='review-list__item' key={review.id}>
 							<ControlComments
 								status={review.status}
 								review={review.text}
@@ -33,9 +37,9 @@ export const ReviewList: FC = () => {
 								handlerModal={ReviewEditModel.getCurrentReview}
 								image={review.authorImage ? `https://academtest.ilink.dev/images/${review.authorImage}` : null}
 							/>
-						</Skeleton>
-					</div>
-				))
+						</div>
+					))
+				)
 			) : (
 				<Empty />
 			)}

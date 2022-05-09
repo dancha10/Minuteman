@@ -38,6 +38,7 @@
     "arrow-body-style": 0,
     "react/jsx-no-useless-fragment": 0,
     "no-unused-expressions": 0,
+    "react/no-array-index-key": 0,
     "jsx-a11y/label-has-associated-control": 0,
     "no-plusplus": [
       "error",

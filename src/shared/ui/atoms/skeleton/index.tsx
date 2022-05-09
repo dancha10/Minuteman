@@ -17,4 +17,8 @@ export const Skeleton: FC<ISkeleton> = ({
 	count = 1,
 	className,
 }) =>
-	isLoading ? <SkeletonLoading count={count} width={width} height={height} className={className} /> : <>{children}</>
+	isLoading ? (
+		<SkeletonLoading count={count} width={width} height={height} className={className} baseColor='#E0E0E0' />
+	) : (
+		<>{children}</>
+	)
