@@ -22,9 +22,15 @@ export const ReviewList: FC = () => {
 	return (
 		<div className='review-list'>
 			{reviews ? (
-				12 ? (
+				isLoading ? (
 					[...new Array(4)].map((_, index) => (
-						<Skeleton isLoading={!!12} height='363px' width='520px' key={index} className='review-list__item' />
+						<Skeleton
+							isLoading={isLoading}
+							height='363px'
+							width='520px'
+							key={index}
+							className='review-list__item'
+						/>
 					))
 				) : (
 					reviews.map(review => (
