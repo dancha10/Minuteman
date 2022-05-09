@@ -7,11 +7,11 @@ export const optionCity = [
 ]
 
 export const optionSex = [
-	{ value: 'Мужчина', label: 'Мужчина' },
-	{ value: 'Женщина', label: 'Женщина' },
+	{ value: 'male', label: 'Мужчина' },
+	{ value: 'female', label: 'Женщина' },
 ]
 
 export const optionPets = [
-	{ value: 'Есть', label: 'Есть' },
-	{ value: 'Нет', label: 'Нет' },
+	{ value: true, label: 'Есть' },
+	{ value: false, label: 'Нет' },
 ]

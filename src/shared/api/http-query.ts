@@ -127,3 +127,48 @@ export const updateStatus = async (
 	if (!request.ok) throw Error(response.message)
 	return response
 }
+
+export const updateSelfPhoto = async (body: FormData) => {
+	const request = await fetch(`${BASE_URL}user/updatePhoto`, {
+		method: 'POST',
+		body,
+		headers: {
+			Authorization: `Bearer ${JSON.parse(localStorage.getItem('@token')!)}`,
+		},
+	})
+	const response = await request.json()
+	if (!request.ok) throw Error(response.message)
+	return response
+}
+
+export const updateProfile = async (
+	firstName: string,
+	lastName: string,
+	birthDate: string,
+	cityOfResidence: string,
+	gender: 'male' | 'female',
+	hasPet: boolean,
+	smallAboutMe: string | null,
+	aboutMe: string
+): Promise<Types.MyProfileType> => {
+	const request = await fetch(`${BASE_URL}user/updateInfo`, {
+		method: 'POST',
+		body: JSON.stringify({
+			firstName,
+			lastName,
+			birthDate,
+			cityOfResidence,
+			gender,
+			hasPet,
+			smallAboutMe,
+			aboutMe,
+		}),
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${JSON.parse(localStorage.getItem('@token')!)}`,
+		},
+	})
+	const response = await request.json()
+	if (!request.ok) throw Error(response.message)
+	return response
+}

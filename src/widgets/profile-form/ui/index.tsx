@@ -3,19 +3,25 @@ import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { useStore } from 'effector-react'
 
 import { Avatar } from 'shared/ui/atoms/avatar'
-import { UploadFile } from 'features/upload-file'
+import { UploadFile, UploadFileModel } from 'features/upload-file'
 import { Button } from 'shared/ui/atoms/button'
 import { Input } from 'shared/ui/atoms/input'
 import { CubeLoader } from 'shared/ui/atoms/cube-loader'
 import { Dropdown } from 'shared/ui/atoms/dropdown'
 import { Textarea } from 'shared/ui/atoms/textarea'
-import { useNotification } from 'entities/notification'
 import { localeDateString } from 'shared/lib'
 
 import { validationFields } from '../lib/validationFields'
 import { ReactComponent as Edit } from '../lib/edit.svg'
 import { optionCity, optionSex, optionPets } from '../lib/options'
-import { $profileData, getProfileData, IProfileFormFields, profileDataFx, setFieldsForm } from '../model/form'
+import {
+	$profileData,
+	getProfileData,
+	IProfileInputFields,
+	profileDataFx,
+	updatedProfilePhoto,
+	updateFields,
+} from '../model/form'
 
 import './style.scss'
 
@@ -26,6 +32,7 @@ export const ProfileForm: FC = () => {
 
 	const profile = useStore($profileData)
 	const isLoading = useStore(profileDataFx.pending)
+	const file = useStore(UploadFileModel.$uploadImage)
 
 	const [inputDateValue, setInputDateValue] = useState('')
 	const [isEditMode, setIsEditMode] = useState<boolean>(false)
@@ -46,11 +53,16 @@ export const ProfileForm: FC = () => {
 		maskDate(localeDateString(profile.birthDate))
 	}, [profile.birthDate])
 
-	const notify = useNotification()
+	useEffect(() => {
+		if (file) {
+			const formData = new FormData()
+			formData.append('profileImage', avatarUploadRef?.current?.files?.[0]!)
+			updatedProfilePhoto(formData)
+		}
+	}, [file])
 
-	const onSubmit: SubmitHandler<IProfileFormFields> = data => {
-		setFieldsForm(data)
-		notify('success', 'Сохранено', 'Данные успешно отредактированы!')
+	const onSubmit: SubmitHandler<IProfileInputFields> = fields => {
+		updateFields(fields)
 		setIsEditMode(false)
 	}
 
@@ -59,7 +71,11 @@ export const ProfileForm: FC = () => {
 		handleSubmit,
 		control,
 		formState: { errors },
-	} = useForm<IProfileFormFields>({ mode: 'onChange' })
+	} = useForm<IProfileInputFields>({ mode: 'onChange' })
+
+	const onEditMode = () => {
+		setIsEditMode(true)
+	}
 
 	if (isLoading) return <CubeLoader isFull />
 
@@ -86,7 +102,7 @@ export const ProfileForm: FC = () => {
 					</div>
 				</div>
 				{!isEditMode && (
-					<Button.Dark type='button' color='primary' onClickHandler={() => setIsEditMode(true)}>
+					<Button.Dark type='button' color='primary' onClickHandler={onEditMode}>
 						Редактировать
 					</Button.Dark>
 				)}
@@ -99,9 +115,9 @@ export const ProfileForm: FC = () => {
 						id='firstname'
 						label='Имя'
 						type='text'
-						validation={{ ...register('firsName', validationFields.firstName) }}
-						isError={!!errors.firsName?.message}
-						errorMessage={errors.firsName?.message}
+						validation={{ ...register('firstName', validationFields.firstName) }}
+						isError={!!errors.firstName?.message}
+						errorMessage={errors.firstName?.message}
 						defaultValue={profile?.firstName}
 					/>
 				</div>
@@ -125,9 +141,9 @@ export const ProfileForm: FC = () => {
 						id='dateOfBirth'
 						label='Дата рождения'
 						type='text'
-						validation={{ ...register('dateOfBirth', validationFields.dateOfBirth) }}
-						isError={!!errors.dateOfBirth?.message}
-						errorMessage={errors.dateOfBirth?.message}
+						validation={{ ...register('birthDate', validationFields.dateOfBirth) }}
+						isError={!!errors.birthDate?.message}
+						errorMessage={errors.birthDate?.message}
 						value={inputDateValue}
 						onChange={maskDate}
 						maxLength={10}
@@ -138,8 +154,8 @@ export const ProfileForm: FC = () => {
 				<div className='profile-form__dropdown-wrapper'>
 					<Controller
 						control={control}
-						name='city'
-						defaultValue={profile.cityOfResidence}
+						name='cityOfResidence'
+						defaultValue={{ value: profile.cityOfResidence, label: profile.cityOfResidence }}
 						render={({ field }) => (
 							<Dropdown
 								fields={{ ...field }}
@@ -155,8 +171,8 @@ export const ProfileForm: FC = () => {
 				<div className='profile-form__dropdown-wrapper'>
 					<Controller
 						control={control}
-						name='sex'
-						defaultValue={profile?.gender}
+						name='gender'
+						defaultValue={{ value: profile.gender, label: profile.gender === 'male' ? 'Мужчина' : 'Женщина' }}
 						render={({ field }) => (
 							<Dropdown
 								fields={field}
@@ -172,8 +188,8 @@ export const ProfileForm: FC = () => {
 				<div className='profile-form__dropdown-wrapper'>
 					<Controller
 						control={control}
-						name='pet'
-						defaultValue='Mda'
+						name='hasPet'
+						defaultValue={{ value: profile.hasPet, label: profile.hasPet ? 'Есть' : 'Нет' }}
 						render={({ field }) => (
 							<Dropdown
 								fields={field}
@@ -191,20 +207,18 @@ export const ProfileForm: FC = () => {
 				<Textarea
 					maxLength={99}
 					placeholder='Введите краткую информацию о себе'
-					isError={false}
-					validation={{}}
+					validation={{ ...register('smallAboutMe') }}
 					label='Краткая информация'
 					isVisibleCounter={isEditMode}
 					disabled={!isEditMode}
-					value={profile?.smallAboutMe!}
+					value={profile?.smallAboutMe ?? ''}
 				/>
 			</div>
 			<div className='profile-form__textarea-wrapper profile-form__textarea-wrapper--about'>
 				<Textarea
 					maxLength={300}
 					placeholder='Распишите подробнее о себе'
-					isError={false}
-					validation={{}}
+					validation={{ ...register('aboutMe') }}
 					label='О себе'
 					isVisibleCounter={isEditMode}
 					disabled={!isEditMode}

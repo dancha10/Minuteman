@@ -23,7 +23,7 @@ export interface IInput {
 }
 
 export interface OptionProps {
-	option: { value: string; label: string }
+	option: { value: string | boolean; label: string }
 }
 
 export interface IUserInfo {
