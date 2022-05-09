@@ -2,7 +2,6 @@ import { FC, useEffect } from 'react'
 
 import { Dropdown } from 'shared/ui/atoms/dropdown'
 import { ReviewList, ReviewListModel } from 'widgets/review-list'
-import { ReviewEditModal } from 'widgets/review-edit'
 
 import './style.scss'
 
@@ -30,7 +29,6 @@ const ReviewsPage: FC = () => {
 			<div className='reviews-page__reviews-area'>
 				<ReviewList />
 			</div>
-			<ReviewEditModal />
 		</div>
 	)
 }

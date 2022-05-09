@@ -5,9 +5,9 @@ import { getUsersList } from 'shared/api'
 
 export const getUserList = createEvent()
 
-export const getUserListFx = createEffect<void, Types.ListReviewsType[], Error>(async () => await getUsersList())
+export const getUserListFx = createEffect<void, Types.MyProfileType[], Error>(async () => await getUsersList())
 
-export const $userList = restore<Types.ListReviewsType[]>(getUserListFx.doneData, [])
+export const $userList = restore<Types.MyProfileType[]>(getUserListFx.doneData, [])
 
 export const $changedRangeViewer = createStore<number>(6)
 
@@ -43,7 +43,7 @@ sample({
 	clock: filteredList,
 	source: $userList,
 	filter: (_, filterStatus) => filterStatus !== 'all',
-	fn: (list, filterStatus) => list?.filter(user => user.status === filterStatus),
+	fn: (list, filterStatus) => list?.filter(user => user.academyStatus === filterStatus),
 	target: $filteredUserList,
 })
 

@@ -1,4 +1,4 @@
-import { createEffect, createEvent, createStore, restore, sample } from 'effector'
+import { createEffect, createEvent, restore, sample } from 'effector'
 
 import { getReviews } from 'shared/api'
 import { Types } from 'shared/lib'
@@ -9,7 +9,7 @@ const filterDate = (prevDate: string, nextDate: string) => {
 	return 0
 }
 
-const sortReviews = (filterStatus: string, comments: Types.IUserReview[]) => {
+const sortReviews = (filterStatus: string, comments: Types.ListReviewsType[]) => {
 	return comments
 		.sort((prev, next) => {
 			if (prev.status === filterStatus && next.status === filterStatus) return 0
@@ -20,10 +20,10 @@ const sortReviews = (filterStatus: string, comments: Types.IUserReview[]) => {
 		})
 		.sort((prevDate, nextDate) => {
 			if (prevDate.status === filterStatus && nextDate.status === filterStatus) {
-				return filterDate(prevDate.dateOfPost, nextDate.dateOfPost)
+				return filterDate(prevDate.createdAt, nextDate.createdAt)
 			}
 			if (prevDate.status === filterStatus || nextDate.status === filterStatus) return 0
-			return filterDate(prevDate.dateOfPost, nextDate.dateOfPost)
+			return filterDate(prevDate.createdAt, nextDate.createdAt)
 		})
 }
 
@@ -41,9 +41,9 @@ sample({
 export const $reviews = restore<Types.ListReviewsType[]>(reviewsFx.doneData, [])
 export const $sortReviews = $reviews.map(reviews => reviews).on(changedFilterStatus, review => [...review])
 
-/* sample({
+sample({
 	clock: changedFilterStatus,
 	source: $reviews,
 	fn: (reviews, filter) => sortReviews(filter, reviews),
 	target: $sortReviews,
-}) */
+})

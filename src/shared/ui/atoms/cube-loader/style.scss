@@ -15,6 +15,14 @@
     z-index: 10000;
   }
 
+  &[data-is-window='true'] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(255, 255, 255, .8);
+    z-index: 10000;
+  }
+
   // .cube-loader__wrapper
   &__wrapper {
     position: relative;

@@ -80,5 +80,3 @@ sample({
 	clock: uploadPhotoFx.doneData,
 	target: clickedButton,
 })
-
-createReviewFx.doneData.watch(el => console.log(el))

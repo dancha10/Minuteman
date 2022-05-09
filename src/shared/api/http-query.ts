@@ -82,9 +82,44 @@ export const updatePhoto = async (id: string, body: FormData) => {
 	return response
 }
 
-export const getUsersList = async (): Promise<Types.ListReviewsType[]> => {
-	const request = await fetch(`${BASE_URL}reviews/getAll`, {
+export const getUsersList = async (): Promise<Types.MyProfileType[]> => {
+	const request = await fetch(`${BASE_URL}user/getAll`, {
 		headers: {
+			Authorization: `Bearer ${JSON.parse(localStorage.getItem('@token')!)}`,
+		},
+	})
+	const response = await request.json()
+	if (!request.ok) throw Error(response.message)
+	return response
+}
+
+export const editReview = async (id: string, text: string): Promise<Types.ListReviewsType> => {
+	const request = await fetch(`${BASE_URL}reviews/updateInfo/${id}`, {
+		method: 'POST',
+		body: JSON.stringify({
+			text,
+		}),
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${JSON.parse(localStorage.getItem('@token')!)}`,
+		},
+	})
+	const response = await request.json()
+	if (!request.ok) throw Error(response.message)
+	return response
+}
+
+export const updateStatus = async (
+	id: string,
+	status: Types.ListReviewsType['status']
+): Promise<Types.ListReviewsType> => {
+	const request = await fetch(`${BASE_URL}reviews/updateStatus/${id}`, {
+		method: 'POST',
+		body: JSON.stringify({
+			status,
+		}),
+		headers: {
+			'Content-Type': 'application/json',
 			Authorization: `Bearer ${JSON.parse(localStorage.getItem('@token')!)}`,
 		},
 	})

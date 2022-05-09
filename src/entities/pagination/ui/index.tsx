@@ -35,16 +35,19 @@ const itemRender = (
 }
 
 const CurrentPaginationList: FC = () => {
-	const list = useList($currentPaginationList, ({ authorImage, authorName, text, status }) => (
-		<li className='pagination__list-item'>
-			<UserList
-				information={text}
-				status={status}
-				fullName={authorName}
-				image={authorImage ? `https://academtest.ilink.dev/images/${authorImage}` : null}
-			/>
-		</li>
-	))
+	const list = useList(
+		$currentPaginationList,
+		({ profileImage, firstName, lastName, smallAboutMe, academyStatus }) => (
+			<li className='pagination__list-item'>
+				<UserList
+					information={smallAboutMe!}
+					status={academyStatus}
+					fullName={`${firstName} ${lastName}`}
+					image={profileImage ? `https://academtest.ilink.dev/images/${profileImage}` : null}
+				/>
+			</li>
+		)
+	)
 	return <ul className='pagination__list'>{list}</ul>
 }
 

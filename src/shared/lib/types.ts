@@ -63,7 +63,7 @@ export interface ListReviewsType {
 	authorName: string
 	title: string
 	text: string
-	status: 'onCheck'
+	status: 'approved' | 'declined' | 'onCheck'
 }
 
 export interface CaptchaType {

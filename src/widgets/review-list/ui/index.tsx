@@ -3,12 +3,13 @@ import { useStore } from 'effector-react'
 
 import { Empty } from 'shared/ui/atoms/empty'
 import { ControlComments } from 'features/action-bar'
-import { ReviewEditModel } from 'widgets/review-edit' // временно
 import { localeDateString } from 'shared/lib'
 import { Skeleton } from 'shared/ui/atoms/skeleton'
 
 import { $sortReviews, getReviewsList, reviewsFx } from '../model/reviewsSort'
+import { getCurrentReview } from '../model/review-modal' // временно
 
+import { ReviewEditModal } from './modal'
 import './style.scss'
 
 export const ReviewList: FC = () => {
@@ -40,8 +41,9 @@ export const ReviewList: FC = () => {
 								review={review.text}
 								name={review.authorName}
 								dateOfPost={localeDateString(review.createdAt)}
-								handlerModal={ReviewEditModel.getCurrentReview}
+								handlerModal={getCurrentReview}
 								image={review.authorImage ? `https://academtest.ilink.dev/images/${review.authorImage}` : null}
+								reviewID={review.id}
 							/>
 						</div>
 					))
@@ -49,6 +51,7 @@ export const ReviewList: FC = () => {
 			) : (
 				<Empty />
 			)}
+			<ReviewEditModal />
 		</div>
 	)
 }
