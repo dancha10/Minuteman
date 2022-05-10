@@ -10,21 +10,23 @@ const filterDate = (prevDate: string, nextDate: string) => {
 }
 
 const sortReviews = (filterStatus: string, comments: Types.ListReviewsType[]) => {
-	return comments
-		.sort((prev, next) => {
-			if (prev.status === filterStatus && next.status === filterStatus) return 0
-			if (prev.status === filterStatus && next.status !== filterStatus) {
-				return -1
-			}
-			return 1
-		})
-		.sort((prevDate, nextDate) => {
-			if (prevDate.status === filterStatus && nextDate.status === filterStatus) {
+	return [
+		...comments
+			.sort((prev, next) => {
+				if (prev.status === filterStatus && next.status === filterStatus) return 0
+				if (prev.status === filterStatus && next.status !== filterStatus) {
+					return -1
+				}
+				return 1
+			})
+			.sort((prevDate, nextDate) => {
+				if (prevDate.status === filterStatus && nextDate.status === filterStatus) {
+					return filterDate(prevDate.createdAt, nextDate.createdAt)
+				}
+				if (prevDate.status === filterStatus || nextDate.status === filterStatus) return 0
 				return filterDate(prevDate.createdAt, nextDate.createdAt)
-			}
-			if (prevDate.status === filterStatus || nextDate.status === filterStatus) return 0
-			return filterDate(prevDate.createdAt, nextDate.createdAt)
-		})
+			}),
+	]
 }
 
 export const changedFilterStatus = createEvent<string>()
@@ -39,11 +41,18 @@ sample({
 })
 
 export const $reviews = restore<Types.ListReviewsType[]>(reviewsFx.doneData, [])
-export const $sortReviews = $reviews.map(reviews => reviews).on(changedFilterStatus, review => [...review])
+export const $sortReviews = $reviews.map(reviews => reviews).on(changedFilterStatus, review => [...review]) // Я хз почему,
+// но без развертывания не срабатывает
 
 sample({
 	clock: changedFilterStatus,
 	source: $reviews,
 	fn: (reviews, filter) => sortReviews(filter, reviews),
 	target: $sortReviews,
+})
+
+sample({
+	clock: reviewsFx.doneData,
+	fn: () => 'onCheck',
+	target: changedFilterStatus,
 })

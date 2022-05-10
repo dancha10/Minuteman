@@ -6,7 +6,7 @@ import { ControlComments } from 'features/action-bar'
 import { localeDateString } from 'shared/lib'
 import { Skeleton } from 'shared/ui/atoms/skeleton'
 
-import { $sortReviews, getReviewsList, reviewsFx } from '../model/reviewsSort'
+import { $sortReviews, changedFilterStatus, getReviewsList, reviewsFx } from '../model/reviewsSort'
 import { getCurrentReview } from '../model/review-modal' // временно
 
 import { ReviewEditModal } from './modal'

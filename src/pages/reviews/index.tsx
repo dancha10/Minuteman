@@ -6,9 +6,9 @@ import { ReviewList, ReviewListModel } from 'widgets/review-list'
 import './style.scss'
 
 const options: { value: string; label: string }[] = [
-	{ value: 'unpublished', label: 'Сначала неопубликованные' },
-	{ value: 'rejected', label: 'Сначала отклоненные' },
-	{ value: 'published', label: 'Сначала опубликованные' },
+	{ value: 'onCheck', label: 'Сначала неопубликованные' },
+	{ value: 'declined', label: 'Сначала отклоненные' },
+	{ value: 'approved', label: 'Сначала опубликованные' },
 ]
 
 const ReviewsPage: FC = () => {
