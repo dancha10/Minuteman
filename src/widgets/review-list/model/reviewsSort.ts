@@ -41,8 +41,7 @@ sample({
 })
 
 export const $reviews = restore<Types.ListReviewsType[]>(reviewsFx.doneData, [])
-export const $sortReviews = $reviews.map(reviews => reviews).on(changedFilterStatus, review => [...review]) // Я хз почему,
-// но без развертывания не срабатывает
+export const $sortReviews = $reviews.map(reviews => reviews)
 
 sample({
 	clock: changedFilterStatus,
