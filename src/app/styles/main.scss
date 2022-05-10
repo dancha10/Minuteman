@@ -101,3 +101,12 @@ h4 {
   padding: 0 15px;
   margin: 0 auto;
 }
+
+::-webkit-scrollbar {
+  width: 7px;
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $purpleHover;
+}
