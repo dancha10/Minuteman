@@ -15,10 +15,12 @@ import { validationFields } from '../lib/validationFields'
 import { ReactComponent as Edit } from '../lib/edit.svg'
 import { optionCity, optionSex, optionPets } from '../lib/options'
 import {
+	$dateFieldError,
 	$profileData,
 	getProfileData,
 	IProfileInputFields,
 	profileDataFx,
+	setDateError,
 	updatedProfilePhoto,
 	updateFields,
 } from '../model/form'
@@ -30,9 +32,9 @@ export const ProfileForm: FC = () => {
 		getProfileData()
 	}, [])
 
-	const profile = useStore($profileData)
 	const isLoading = useStore(profileDataFx.pending)
 	const file = useStore(UploadFileModel.$uploadImage)
+	const profile = useStore($profileData)
 
 	const [inputDateValue, setInputDateValue] = useState('')
 	const [isEditMode, setIsEditMode] = useState<boolean>(false)
@@ -61,8 +63,25 @@ export const ProfileForm: FC = () => {
 		}
 	}, [file])
 
+	const dataField = useStore($dateFieldError)
+
 	const onSubmit: SubmitHandler<IProfileInputFields> = fields => {
-		updateFields(fields)
+		if (new Date(fields.birthDate) > new Date()) {
+			return setDateError('Дата рождения не должна быть больше сегодняшней')
+		}
+		updateFields({
+			firstName: fields.firstName ?? profile.firstName,
+			lastName: fields.lastName ?? profile.lastName,
+			birthDate: fields.birthDate ?? profile.birthDate,
+			gender: fields.gender ?? { value: profile.gender, label: profile.gender },
+			cityOfResidence: fields.cityOfResidence ?? {
+				value: profile.gender,
+				label: profile.gender === 'male' ? 'Мужчина' : 'Женщина',
+			},
+			hasPet: fields.hasPet ?? { value: profile.hasPet, label: profile.hasPet ? 'Есть' : 'Нет' },
+			aboutMe: fields.aboutMe ?? profile.aboutMe,
+			smallAboutMe: fields.smallAboutMe ?? profile.smallAboutMe,
+		})
 		setIsEditMode(false)
 	}
 
@@ -141,9 +160,9 @@ export const ProfileForm: FC = () => {
 						id='dateOfBirth'
 						label='Дата рождения'
 						type='text'
-						validation={{ ...register('birthDate', validationFields.dateOfBirth) }}
-						isError={!!errors.birthDate?.message}
-						errorMessage={errors.birthDate?.message}
+						validation={{ ...register('birthDate') }}
+						isError={!!dataField}
+						errorMessage={dataField}
 						value={inputDateValue}
 						onChange={maskDate}
 						maxLength={10}

@@ -1,15 +1,14 @@
 import { createEffect, createEvent, restore, sample } from 'effector'
+import { delay } from 'patronum/delay'
 
 import { Types } from 'shared/lib'
 import { getMyProfile, updateProfile, updateSelfPhoto } from 'shared/api'
 import { NotificationModel } from 'entities/notification'
-import { UploadFileModel } from 'features/upload-file'
 import { ErrorModel } from 'entities/error'
 
 export interface IProfileInputFields {
 	firstName: string
 	lastName: string
-	profileImage: string
 	birthDate: string
 	gender: { value: 'male' | 'female'; label: string }
 	cityOfResidence: { value: string; label: string }
@@ -100,4 +99,15 @@ sample({
 sample({
 	clock: [updateMyProfileFx.doneData, updateProfilePhotoFx.doneData],
 	target: getProfileData,
+})
+
+export const setDateError = createEvent<string>()
+const resetDateError = createEvent()
+export const $dateFieldError = restore<string>(setDateError, '').reset(resetDateError)
+
+const clearDateError = delay({ source: setDateError, timeout: 5000 })
+
+sample({
+	clock: clearDateError,
+	target: resetDateError,
 })
