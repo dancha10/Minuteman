@@ -5,7 +5,7 @@ import './style.scss'
 
 interface IRouterLink {
 	to: string
-	classname: string
+	classname?: string
 }
 
 export const RouterLink: FC<IRouterLink> = ({ to, classname, children }) => {

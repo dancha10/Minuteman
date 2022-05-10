@@ -1,9 +1,10 @@
 import { FC, ReactNode } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import { Header } from 'shared/ui/organisms/header'
 import { Footer } from 'shared/ui/organisms/footer'
 import { Container } from 'shared/ui/atoms/container'
+import { Header } from 'widgets/header' // Методологией не регламентируется + мне кажется это лучше чем получать нужные
+// данные для хедера на уровне роутинга и через 100500 компонентов устраивать пропсдриллинг
 
 import './style.scss'
 

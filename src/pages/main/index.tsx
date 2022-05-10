@@ -1,7 +1,7 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { useGate, useStore } from 'effector-react'
 
-import { Header } from 'shared/ui/organisms/header'
+import { Header } from 'widgets/header'
 import { Footer } from 'shared/ui/organisms/footer'
 import { ReviewModal } from 'widgets/review-modal'
 import { SliderReviews } from 'widgets/slider-reviews'
@@ -27,7 +27,7 @@ const MainPage: FC = () => {
 					<div className='preview__card'>
 						<UserCard
 							fullName={`${profileFields?.firstName} ${profileFields?.lastName}`}
-							yearBirth={localeDateString(new Date(profileFields?.birthDate!).toLocaleDateString())}
+							yearBirth={localeDateString(new Date(profileFields?.birthDate ?? '').toLocaleDateString())}
 							city={profileFields?.cityOfResidence}
 							sex={profileFields?.gender}
 							pets={profileFields?.hasPet}

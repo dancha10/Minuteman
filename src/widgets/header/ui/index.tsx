@@ -1,6 +1,5 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useStore } from 'effector-react'
-import { useNavigate } from 'react-router-dom'
 
 import { Container } from 'shared/ui/atoms/container'
 import { UserViewer } from 'shared/ui/molecules/user-viewer'
@@ -8,8 +7,9 @@ import { Button } from 'shared/ui/atoms/button'
 import { Logo } from 'shared/ui/atoms/logo'
 import { RouterLink } from 'shared/ui/atoms/router-link'
 import { $isMobileWidth, SCREENS } from 'shared/lib'
+import { $userData, getUserData } from 'widgets/header/model'
 
-import { ReactComponent as MobileProfile } from './profile.svg'
+import { ReactComponent as MobileProfile } from '../lib/profile.svg'
 
 import './style.scss'
 
@@ -18,12 +18,13 @@ interface IHeader {
 }
 
 export const Header: FC<IHeader> = ({ type }) => {
-	const navigate = useNavigate()
 	const isMobileWidth = useStore($isMobileWidth)
 
-	const goToAdminPanel = () => {
-		navigate(SCREENS.USERS)
-	}
+	useEffect(() => {
+		getUserData()
+	}, [])
+
+	const userData = useStore($userData)
 
 	return (
 		<header className={`header header--${type}`}>
@@ -32,29 +33,27 @@ export const Header: FC<IHeader> = ({ type }) => {
 					{type === 'primary' ? (
 						<>
 							<UserViewer
-								fullName='Даниил Абраменко'
-								image='https://sun9-36.userapi.com/impf/c849332/v849332182/d8a7e/SzEtiqLuErs.jpg?size=960x1280&quality=96&sign=4ae6bc474b03e1683da4b35cf31ac851&type=album'
+								fullName={`${userData?.firstName} ${userData?.lastName}`}
+								image={`https://academtest.ilink.dev/images/${userData?.profileImage}`}
 								isMobileWidth={isMobileWidth}
 							/>
 							<Logo />
 							<RouterLink to={SCREENS.USERS} classname=''>
-								<Button.Dark onClickHandler={goToAdminPanel}>
-									{isMobileWidth ? <MobileProfile /> : 'Панель управления'}
-								</Button.Dark>
+								<Button.Dark>{isMobileWidth ? <MobileProfile /> : 'Панель управления'}</Button.Dark>
 							</RouterLink>
 						</>
 					) : (
 						<>
 							<div className='header__left-container'>
 								<UserViewer
-									fullName='Даниил Абраменко'
-									image='https://sun9-36.userapi.com/impf/c849332/v849332182/d8a7e/SzEtiqLuErs.jpg?size=960x1280&quality=96&sign=4ae6bc474b03e1683da4b35cf31ac851&type=album'
+									fullName={`${userData?.firstName} ${userData?.lastName}`}
+									image={`https://academtest.ilink.dev/images/${userData?.profileImage}`}
 									isMobileWidth={isMobileWidth}
 								/>
 								<h3>Панель управления</h3>
 							</div>
 							<div className='header__right-container'>
-								<RouterLink to={SCREENS.LANDING} classname=''>
+								<RouterLink to={SCREENS.LANDING}>
 									<Logo color='white' />
 								</RouterLink>
 							</div>
