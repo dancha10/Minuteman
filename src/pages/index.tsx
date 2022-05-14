@@ -13,7 +13,7 @@ const AuthLayout = lazy(() => import('shared/ui/templates/auth-container'))
 const AdminPanelContainer = lazy(() => import('shared/ui/templates/admin-container'))
 const UserPage = lazy(() => import('pages/users'))
 const ReviewsPage = lazy(() => import('pages/reviews'))
-const ProfilePage = lazy(() => import('pages/profile/ui'))
+const ProfilePage = lazy(() => import('pages/profile'))
 
 export const Router: FC = () => {
 	const isAuthenticated = useStore(AuthModel.$isAuthenticated)
@@ -27,7 +27,7 @@ export const Router: FC = () => {
 					<Route path={SCREENS.REVIEWS} element={<ReviewsPage />} />
 					<Route path={SCREENS.PROFILE} element={<ProfilePage />} />
 				</Route>
-				<Route path={SCREENS.REDIRECT} element={<Navigate to={SCREENS.USERS} />} />
+				<Route path={SCREENS.REDIRECT} element={<Navigate to={SCREENS.LANDING} />} />
 			</Routes>
 		)
 	}

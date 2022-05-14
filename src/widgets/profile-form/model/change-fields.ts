@@ -4,6 +4,7 @@ import { getMyProfile, updateProfile, updateSelfPhoto } from 'shared/api'
 import { localeDateString, Types } from 'shared/lib'
 import { NotificationModel } from 'entities/notification'
 import { ErrorModel } from 'entities/error'
+import { UserModel } from 'entities/user'
 
 import { myProfileForm } from './form'
 
@@ -110,4 +111,9 @@ sample({
 	clock: updateProfilePhotoFx.failData,
 	fn: () => 'Произошла какая-то ошибка. Попробуйте еще раз',
 	target: ErrorModel.setError,
+})
+
+sample({
+	clock: profileDataFx.doneData,
+	target: UserModel.$userProfile,
 })
