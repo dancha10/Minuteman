@@ -15,6 +15,7 @@ interface ITextarea extends Types.IInput {
 export const Textarea: FC<ITextarea> = ({
 	placeholder,
 	maxLength,
+	onChange,
 	validation,
 	isError,
 	disabled,
@@ -26,6 +27,11 @@ export const Textarea: FC<ITextarea> = ({
 
 	const changeValue = (value: string): void => setCurrentLength(value.length)
 
+	const onChangeText = (text: string) => {
+		changeValue(text)
+		onChange && onChange(text)
+	}
+
 	return (
 		<div className={classList('textarea', { 'textarea--error': isError })}>
 			<label>
@@ -33,10 +39,10 @@ export const Textarea: FC<ITextarea> = ({
 				<textarea
 					{...validation}
 					placeholder={placeholder}
-					onChange={e => changeValue(e.target.value)}
+					onChange={event => onChangeText(event.target.value)}
 					maxLength={maxLength}
 					disabled={disabled}
-					defaultValue={value}
+					value={value}
 				/>
 				{isVisibleCounter && (
 					<p className='textarea__counter'>

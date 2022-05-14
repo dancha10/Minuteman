@@ -67,5 +67,5 @@ export interface CaptchaType {
 
 export interface UploadType {
 	id: string
-	authorImage: FormData
+	authorImage: FileList
 }
