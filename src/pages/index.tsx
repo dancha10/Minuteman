@@ -13,7 +13,7 @@ const AuthLayout = lazy(() => import('shared/ui/templates/auth-container'))
 const AdminPanelContainer = lazy(() => import('shared/ui/templates/admin-container'))
 const UserPage = lazy(() => import('pages/users'))
 const ReviewsPage = lazy(() => import('pages/reviews'))
-const ProfilePage = lazy(() => import('pages/profile'))
+const ProfilePage = lazy(() => import('pages/profile/ui'))
 
 export const Router: FC = () => {
 	const isAuthenticated = useStore(AuthModel.$isAuthenticated)

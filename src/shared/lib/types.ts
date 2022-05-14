@@ -26,12 +26,6 @@ export interface OptionProps {
 	option: { value: string | boolean; label: string }
 }
 
-export interface IUserInfo {
-	name: string
-	description: string
-	status: 'studying' | 'expelled' | 'graduated'
-}
-
 export interface AuthType {
 	accessToken: string
 	expiresIn: number

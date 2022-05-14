@@ -20,7 +20,12 @@ export const AuthFormByEmail: FC = () => {
 		reset()
 	}, [])
 
-	const isDisabledSubmitButton = !!isErrorToServer || !!fields.email.errors.length || !!fields.password.errors.length
+	const isDisabledSubmitButton =
+		!!isErrorToServer ||
+		!!fields.email.errors.length ||
+		!!fields.password.errors.length ||
+		!fields.email.value ||
+		!fields.password.value
 
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()

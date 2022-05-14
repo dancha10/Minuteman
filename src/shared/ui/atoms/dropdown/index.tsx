@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import Select, { components } from 'react-select'
+import Select, { components, SingleValue } from 'react-select'
 
 import { Types } from 'shared/lib'
 
@@ -9,14 +9,13 @@ import './style.scss'
 
 interface IDropdown {
 	options: Array<Types.OptionProps['option']>
-	onChanged?: (value: string) => void
+	onSelect?: (item: SingleValue<Types.OptionProps['option']>) => void
 	placeholder?: string
 	label?: string
 	isFirstElement?: boolean
 	isDisabled?: boolean
 	isScroll?: boolean
 	value?: Types.OptionProps['option']
-	fields?: Object
 }
 
 const DropdownIndicator = (props: any) => {
@@ -31,14 +30,13 @@ const DropdownIndicator = (props: any) => {
 
 export const Dropdown: FC<IDropdown> = ({
 	options,
-	onChanged,
+	onSelect,
 	placeholder,
 	label,
 	isFirstElement = true,
 	isScroll = false,
 	isDisabled,
 	value,
-	fields,
 }) => {
 	return (
 		<div className='dropdown-wrapper'>
@@ -49,12 +47,11 @@ export const Dropdown: FC<IDropdown> = ({
 				defaultValue={isFirstElement ? options[0] : undefined}
 				isSearchable={false}
 				components={{ DropdownIndicator }}
-				onChange={onChanged && ((el: any) => onChanged(el?.value!))}
+				onChange={onSelect}
 				placeholder={placeholder}
 				isDisabled={isDisabled}
 				captureMenuScroll={isScroll}
 				value={value}
-				{...fields}
 			/>
 		</div>
 	)

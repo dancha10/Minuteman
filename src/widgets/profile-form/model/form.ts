@@ -1,113 +1,117 @@
-import { createEffect, createEvent, restore, sample } from 'effector'
-import { delay } from 'patronum/delay'
+import { sample } from 'effector'
+import { createForm } from 'effector-forms'
+import * as yup from 'yup'
+import { SingleValue } from 'react-select'
 
-import { Types } from 'shared/lib'
-import { getMyProfile, updateProfile, updateSelfPhoto } from 'shared/api'
-import { NotificationModel } from 'entities/notification'
-import { ErrorModel } from 'entities/error'
+import { createRule, Types } from 'shared/lib'
+import { REQUIRED_MESSAGE } from 'shared/const'
 
-export interface IProfileInputFields {
-	firstName: string
-	lastName: string
-	birthDate: string
-	gender: { value: 'male' | 'female'; label: string }
-	cityOfResidence: { value: string; label: string }
-	hasPet: { value: boolean; label: string }
-	aboutMe: string
-	smallAboutMe: string | null
-}
+import { dateMask } from '../lib/dateMask'
 
-export const getProfileData = createEvent()
-
-export const profileDataFx = createEffect<void, Types.MyProfileType, Error>(async () => await getMyProfile())
-
-export const $profileData = restore<Types.MyProfileType>(profileDataFx.doneData, {
-	firstName: '',
-	lastName: '',
-	profileImage: '',
-	birthDate: '',
-	gender: 'male',
-	cityOfResidence: '',
-	favoriteFood: '',
-	hasPet: false,
-	petType: '',
-	petName: '',
-	aboutMe: '',
-	smallAboutMe: '',
-	academyStatus: 'studies',
+export const myProfileForm = createForm({
+	fields: {
+		firstName: {
+			init: '',
+			rules: [
+				createRule<string>({
+					name: 'firstName',
+					schema: yup.string().required(REQUIRED_MESSAGE),
+				}),
+			],
+		},
+		lastName: {
+			init: '',
+			rules: [
+				createRule<string>({
+					name: 'lastName',
+					schema: yup.string().required(REQUIRED_MESSAGE),
+				}),
+			],
+		},
+		birthDate: {
+			init: '',
+			rules: [
+				createRule<string>({
+					name: 'birthDate',
+					schema: yup
+						.string()
+						.required(REQUIRED_MESSAGE)
+						.test({
+							message: 'Дата рождения не должна быть больше сегодняшней',
+							test: value => new Date(value!) < new Date(),
+						}),
+				}),
+			],
+		},
+		cityOfResidence: {
+			init: {} as SingleValue<any>,
+			rules: [
+				createRule<Types.OptionProps>({
+					name: 'cityOfResidence',
+					schema: yup.object().nullable(),
+				}),
+			],
+		},
+		gender: {
+			init: {} as SingleValue<any>,
+			rules: [
+				createRule<Types.OptionProps>({
+					name: 'gender',
+					schema: yup.object().nullable(),
+				}),
+			],
+		},
+		hasPet: {
+			init: {} as SingleValue<any>,
+			rules: [
+				createRule<Types.OptionProps>({
+					name: 'hasPet',
+					schema: yup.object().nullable(),
+				}),
+			],
+		},
+		aboutMe: {
+			init: '',
+			rules: [
+				createRule<string>({
+					name: 'aboutMe',
+					schema: yup.string().required(REQUIRED_MESSAGE),
+				}),
+			],
+		},
+		smallAboutMe: {
+			init: '',
+			rules: [
+				createRule<string>({
+					name: 'smallAboutMe',
+					schema: yup.string(),
+				}),
+			],
+		},
+		profileImage: {
+			init: {} as FileList,
+			rules: [
+				createRule<FileList>({
+					name: 'profileImage',
+					schema: yup
+						.mixed()
+						.test({
+							message: 'Размер файла не должен превышать 5мб',
+							test: (file: FileList) => file[0].size < 1024 * 1024 * 5,
+						})
+						.test({
+							message: 'Доступные форматы изображений jpeg и png.',
+							test: (file: FileList) => /\.(jpe?g|png)$/i.test(file[0]?.name),
+						}),
+				}),
+			],
+		},
+	},
+	validateOn: ['change', 'submit'],
 })
 
 sample({
-	clock: getProfileData,
-	target: profileDataFx,
-})
-
-export const updateFields = createEvent<IProfileInputFields>()
-export const updateMyProfileFx = createEffect<IProfileInputFields, Types.MyProfileType, Error>(
-	async ({ firstName, lastName, birthDate, cityOfResidence, gender, hasPet, smallAboutMe, aboutMe }) =>
-		await updateProfile(
-			firstName,
-			lastName,
-			birthDate,
-			cityOfResidence.value,
-			gender.value,
-			hasPet.value,
-			smallAboutMe,
-			aboutMe
-		)
-)
-
-sample({
-	clock: updateFields,
-	target: updateMyProfileFx,
-})
-
-sample({
-	clock: updateMyProfileFx.doneData,
-	fn: () => ({ type: 'success', title: 'Успешно', message: 'Профиль успешно изменен' }),
-	target: NotificationModel.setNotify,
-})
-
-sample({
-	clock: updateMyProfileFx.failData,
-	fn: () => ({ type: 'error', title: 'Что-то не так!', message: 'Произошла какая-то ошибка. Попробуйте еще раз' }),
-	target: NotificationModel.setNotify,
-})
-
-export const updatedProfilePhoto = createEvent<FormData>()
-export const updateProfilePhotoFx = createEffect<FormData, any, Error>(async profileImage =>
-	updateSelfPhoto(profileImage)
-)
-
-sample({
-	clock: updatedProfilePhoto,
-	target: updateProfilePhotoFx,
-})
-
-sample({
-	clock: updateProfilePhotoFx.doneData,
-	fn: () => ({ type: 'success', title: 'Успешно', message: 'Фото успешно загружено' }),
-	target: NotificationModel.setNotify,
-})
-
-sample({
-	clock: updateProfilePhotoFx.failData,
-	fn: () => 'Произошла какая-то ошибка. Попробуйте еще раз',
-	target: ErrorModel.setError,
-})
-
-sample({
-	clock: [updateMyProfileFx.doneData, updateProfilePhotoFx.doneData],
-	target: getProfileData,
-})
-
-export const setDateError = createEvent<string>()
-const resetDateError = createEvent()
-export const $dateFieldError = restore<string>(setDateError, '').reset(resetDateError)
-
-const clearDateError = delay({ source: setDateError, timeout: 5000 })
-
-sample({
-	clock: clearDateError,
-	target: resetDateError,
+	clock: myProfileForm.fields.birthDate.onChange,
+	fn: text => dateMask(text),
+	target: myProfileForm.fields.birthDate.$value,
 })

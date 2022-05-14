@@ -5,14 +5,13 @@ import * as yup from 'yup'
 
 import { ErrorModel } from 'entities/error'
 import { login } from 'shared/api'
-import { createRule, emailRegexp, passwordRegexp } from 'shared/lib'
+import { createRule, emailRegex, passwordRegex } from 'shared/lib'
+import { REQUIRED_MESSAGE } from 'shared/const'
 
 interface IAuthFormFields {
 	email: string
 	password: string
 }
-
-const REQUIRED_MESSAGE = 'Это поля является обязательным'
 
 export const loginForm = createForm({
 	fields: {
@@ -21,7 +20,7 @@ export const loginForm = createForm({
 			rules: [
 				createRule<string>({
 					name: 'email',
-					schema: yup.string().required(REQUIRED_MESSAGE).matches(emailRegexp, 'Введите корректный email'),
+					schema: yup.string().required(REQUIRED_MESSAGE).matches(emailRegex, 'Введите корректный email'),
 				}),
 			],
 		},
@@ -36,7 +35,7 @@ export const loginForm = createForm({
 						.min(8, 'Минимальная длина пароля 8 символов')
 						.max(24, 'Максимальная длина пароля 24 символа')
 						.matches(
-							passwordRegexp,
+							passwordRegex,
 							'Пароль должен содержать прописные и строчные буквы, а также спецсимволы и цифры'
 						),
 				}),
