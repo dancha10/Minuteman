@@ -34,23 +34,25 @@ export const Modified: FC<IInputModified> = ({
 	const [isActive, setIsActive] = useState(false)
 	const changedActive = (value: string) => (value.length ? setIsActive(true) : setIsActive(false))
 
+	const onChangeText = (value: string) => {
+		changedActive(value)
+		onChange && onChange(value)
+	}
+
 	return (
 		<label htmlFor={id} className='input-field'>
 			{label}
 			<div className='input-field__container'>
 				<input
 					{...validation}
+					id={id}
 					type={isVisibleContent ? 'text' : 'password'}
 					placeholder={placeholder}
 					className='input-field__input'
 					data-is-password={type === 'password'}
 					data-is-active={isActive}
 					data-is-error={isError}
-					id={id}
-					onInput={event => {
-						changedActive(event.currentTarget.value)
-						onChange && onChange(event.currentTarget.value)
-					}}
+					onChange={event => onChangeText(event.target.value)}
 					maxLength={maxLength}
 					disabled={disabled}
 					value={value}

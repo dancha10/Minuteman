@@ -14,6 +14,7 @@
     "classnames": "^2.3.1",
     "compose-function": "^3.0.3",
     "effector": "^22.2.0",
+    "effector-forms": "^0.0.22",
     "effector-react": "^22.0.6",
     "effector-storage": "^5.0.0",
     "gh-pages": "^3.2.3",
@@ -28,7 +29,8 @@
     "react-slick": "^0.28.1",
     "react-transition-group": "^4.4.2",
     "sass": "^1.50.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.16.7",
