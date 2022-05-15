@@ -9,8 +9,8 @@ import { Input } from 'shared/ui/atoms/input'
 import { CubeLoader } from 'shared/ui/atoms/cube-loader'
 import { Dropdown } from 'shared/ui/atoms/dropdown'
 import { Textarea } from 'shared/ui/atoms/textarea'
+import { Icon } from 'shared/ui/atoms/icon'
 
-import { ReactComponent as Edit } from '../lib/edit.svg'
 import { optionCity, optionSex, optionPets } from '../lib/options'
 import { $avatarURL, getProfileData, profileDataFx } from '../model/change-fields'
 import { myProfileForm } from '../model/form'
@@ -59,7 +59,7 @@ export const ProfileForm: FC = () => {
 						<p>Фото профиля</p>
 						<UploadFile onChangeFile={fields.profileImage.onChange}>
 							<div className='profile-form__upload-file'>
-								<Edit />
+								<Icon name='edit' />
 								Изменить фото
 							</div>
 						</UploadFile>

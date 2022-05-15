@@ -1,10 +1,7 @@
 import { FC, useState } from 'react'
 
 import { Types } from 'shared/lib'
-
-import { ReactComponent as Eye } from './eye.svg'
-import { ReactComponent as EyeClosed } from './eyeClosed.svg'
-import { ReactComponent as ErrorInformation } from './info.svg'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import './style.scss'
 
@@ -67,12 +64,12 @@ export const Modified: FC<IInputModified> = ({
 							data-is-active={isActive}
 							onClick={() => setIsVisibleContent(prev => !prev)}
 						>
-							{isVisibleContent ? <EyeClosed /> : <Eye />}
+							{isVisibleContent ? <Icon name='eyeClosed' /> : <Icon name='eye' />}
 						</button>
 					)}
 					{errorMessage && isError && (
 						<div className='input-field__warning' data-error={errorMessage}>
-							<ErrorInformation />
+							<Icon name='info' />
 						</div>
 					)}
 				</div>

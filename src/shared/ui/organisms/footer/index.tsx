@@ -1,8 +1,6 @@
 import { FC } from 'react'
 
-import { ReactComponent as Telegram } from './telegram.svg'
-import { ReactComponent as Vk } from './vk.svg'
-import { ReactComponent as Reddit } from './reddit.svg'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import './style.scss'
 
@@ -14,17 +12,17 @@ export const Footer: FC = () => {
 				<ul className='footer__social-media'>
 					<li className='footer__link'>
 						<a href='https://vk.com/dan_speeday' target='_blank' rel='noreferrer'>
-							<Vk />
+							<Icon name='vkontankte' />
 						</a>
 					</li>
 					<li className='footer__link'>
 						<a href='https://github.com/dancha10' target='_blank' rel='noreferrer'>
-							<Reddit />
+							<Icon name='reddit' />
 						</a>
 					</li>
 					<li className='footer__link'>
 						<a href='https://t.me/dancha_bruh' target='_blank' rel='noreferrer'>
-							<Telegram />
+							<Icon name='telegram' />
 						</a>
 					</li>
 				</ul>

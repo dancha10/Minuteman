@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect, useRef } from 'react'
+import React, { FC, FormEvent, useEffect, useRef } from 'react'
 import { useStore } from 'effector-react'
 import { useForm } from 'effector-forms'
 
@@ -10,11 +10,8 @@ import { CubeLoader } from 'shared/ui/atoms/cube-loader'
 import { Textarea } from 'shared/ui/atoms/textarea'
 import { FilePreview } from 'shared/ui/molecules/file-preview'
 import { Button } from 'shared/ui/atoms/button'
+import { Icon } from 'shared/ui/atoms/icon'
 
-import { ReactComponent as Information } from '../lib/info.svg'
-import { ReactComponent as Cross } from '../lib/cross.svg'
-import { ReactComponent as Delete } from '../lib/delete.svg'
-import { ReactComponent as Reload } from '../lib/reload.svg'
 import { $captcha, updateCaptcha, resetCaptchaFx, reviewForm } from '../model'
 
 import './style.scss'
@@ -76,7 +73,7 @@ export const ReviewModal: FC = () => {
 						</UploadFile>
 						{hasError('fullName') && (
 							<div className='review-model__error-message'>
-								<Cross width={10} height={10} />
+								<Icon name='plus' width={10} height={10} />
 								<span>{fields.fullName?.errors[0]?.errorText}</span>
 							</div>
 						)}
@@ -89,7 +86,7 @@ export const ReviewModal: FC = () => {
 								error={errorMessage}
 								action={
 									<button className='review-model__delete' onClick={deleteFile}>
-										<Delete />
+										<Icon name='trash' />
 									</button>
 								}
 							/>
@@ -106,7 +103,7 @@ export const ReviewModal: FC = () => {
 						/>
 						{hasError('review') && (
 							<div className='review-model__error-message'>
-								<Cross width={10} height={10} />
+								<Icon name='plus' width={10} height={10} />
 								<span>{fields.review?.errors[0]?.errorText}</span>
 							</div>
 						)}
@@ -130,14 +127,14 @@ export const ReviewModal: FC = () => {
 								)}
 							</div>
 							<button type='button' onClick={reloadCaptcha} className='review-model__reset-captcha'>
-								<Reload />
+								<Icon name='reload' />
 							</button>
 						</div>
 					</div>
 					<div className='review-model__submit'>
 						<Button.Dark type='submit'>Отправить отзыв</Button.Dark>
 						<div className='review-model__information'>
-							<Information />
+							<Icon name='infoReview' />
 							<span>Все отзывы проходят модерацию в течение 2 часов</span>
 						</div>
 					</div>

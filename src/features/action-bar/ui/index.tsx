@@ -4,10 +4,7 @@ import classNames from 'classnames'
 import { Button } from 'shared/ui/atoms/button'
 import { IUserComment, UserComment } from 'shared/ui/molecules/user-comment'
 import { changedStatusReview } from 'features/action-bar/model'
-
-import { ReactComponent as Edit } from '../lib/edit.svg'
-import { ReactComponent as Check } from '../lib/check.svg'
-import { ReactComponent as Cross } from '../lib/cross.svg'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import './style.scss'
 
@@ -60,18 +57,18 @@ export const ControlComments: FC<ICommentPanel> = ({
 						</div>
 						<div className='control-comment__edit'>
 							<Button.Dark color='primary' type='button' onClickHandler={handler}>
-								<Edit />
+								<Icon name='edit' />
 							</Button.Dark>
 						</div>
 					</>
 				) : status === 'approved' ? (
 					<div className='control-comment__feedback control-comment__feedback--published'>
-						<Check />
+						<Icon name='check' />
 						<p>Отзыв опубликован</p>
 					</div>
 				) : (
 					<div className='control-comment__feedback control-comment__feedback--reject'>
-						<Cross />
+						<Icon name='reject' />
 						<p>Отзыв отклонен</p>
 					</div>
 				)}

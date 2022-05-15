@@ -6,9 +6,8 @@ import { User, UserModel } from 'entities/user'
 import { Button } from 'shared/ui/atoms/button'
 import { Logo } from 'shared/ui/atoms/logo'
 import { RouterLink } from 'shared/ui/atoms/router-link'
+import { Icon } from 'shared/ui/atoms/icon'
 import { $isMobileWidth, SCREENS } from 'shared/lib'
-
-import { ReactComponent as MobileProfile } from '../lib/profile.svg'
 
 import './style.scss'
 
@@ -31,7 +30,7 @@ export const Header: FC<IHeader> = ({ type }) => {
 							<User />
 							<Logo />
 							<RouterLink to={SCREENS.USERS} classname=''>
-								<Button.Dark>{isMobileWidth ? <MobileProfile /> : 'Панель управления'}</Button.Dark>
+								<Button.Dark>{isMobileWidth ? <Icon name='profile' /> : 'Панель управления'}</Button.Dark>
 							</RouterLink>
 						</>
 					) : (

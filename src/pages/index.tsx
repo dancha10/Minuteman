@@ -27,7 +27,7 @@ export const Router: FC = () => {
 					<Route path={SCREENS.REVIEWS} element={<ReviewsPage />} />
 					<Route path={SCREENS.PROFILE} element={<ProfilePage />} />
 				</Route>
-				<Route path={SCREENS.REDIRECT} element={<Navigate to={SCREENS.LANDING} />} />
+				<Route path={SCREENS.REDIRECT} element={<Navigate to={SCREENS.USERS} />} />
 			</Routes>
 		)
 	}

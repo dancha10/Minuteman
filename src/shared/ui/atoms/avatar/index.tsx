@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { ReactComponent as ProfileAvatar } from './camera.svg'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import './style.scss'
 
@@ -15,7 +15,7 @@ export const Avatar: FC<IAvatar> = ({ image }) => {
 				<img src={image} alt='profile' />
 			) : (
 				<div className='avatar__camera'>
-					<ProfileAvatar />
+					<Icon name='camera' />
 				</div>
 			)}
 		</div>

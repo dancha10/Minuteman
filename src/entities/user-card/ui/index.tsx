@@ -1,8 +1,7 @@
 import { FC } from 'react'
 
-import { ReactComponent as Male } from '../lib/male.svg'
-import { ReactComponent as Female } from '../lib/female.svg'
-import { ReactComponent as Pet } from '../lib/pet.svg'
+import { Icon } from 'shared/ui/atoms/icon'
+
 import { getCurrentAge } from '../model/model'
 
 import './style.scss'
@@ -31,7 +30,7 @@ export const UserCard: FC<IUserCard> = ({ fullName, city, sex, yearBirth, descri
 				<li>
 					<span className='user-card__tag'>Пол:</span>
 					{sex}
-					{sex === 'male' ? <Male /> : <Female />}
+					{sex === 'male' ? <Icon name='male' /> : <Icon name='female' />}
 				</li>
 				<li>
 					<span className='user-card__tag'>Возраст:</span>
@@ -43,7 +42,7 @@ export const UserCard: FC<IUserCard> = ({ fullName, city, sex, yearBirth, descri
 				{description}
 			</p>
 			<div className='user-card__pet'>
-				<Pet />
+				<Icon name='pet' />
 				<span className='user-card__tag'>Домашнее животное:</span>
 				{pets ? <span>есть</span> : <span>нет ;(</span>}
 			</div>

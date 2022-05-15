@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { ReactComponent as Nodata } from './nodata.svg'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import './style.scss'
 
@@ -8,7 +8,7 @@ export const Empty: FC = () => {
 	return (
 		<div className='empty'>
 			<div className='empty__content'>
-				<Nodata />
+				<Icon name='noData' />
 				<p>Здесь еще нет данных...</p>
 			</div>
 		</div>

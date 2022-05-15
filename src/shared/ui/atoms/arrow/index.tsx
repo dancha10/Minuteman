@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { ReactComponent as Arrow } from './arrow.svg'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import './style.scss'
 
@@ -19,7 +19,7 @@ export const ArrowSlider: FC<IArrowSlider> = ({ rotate, onClick, classname, disa
 			disabled={disabled}
 			onClick={onClick}
 		>
-			<Arrow />
+			<Icon name='nextArrow' />
 		</button>
 	)
 }

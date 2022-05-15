@@ -1,8 +1,7 @@
 import { FC } from 'react'
 
 import { Types } from 'shared/lib'
-
-import { ReactComponent as Addition } from './addition.svg'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import './style.scss'
 
@@ -21,7 +20,7 @@ export const Dark: FC<IButtonDark> = ({
 }) => {
 	return (
 		<button type={type} className={`btn btn--dark btn--${color}`} onClick={onClickHandler} disabled={disabled}>
-			{addition && <Addition />}
+			{addition && <Icon name='addition' />}
 			{children}
 		</button>
 	)

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { ReactComponent as Close } from '../lib/close.svg'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import './style.scss'
 
@@ -11,7 +11,7 @@ interface IToggleModal {
 export const ToggleModal: FC<IToggleModal> = ({ toggle }) => {
 	return (
 		<button className='toggle-modal' onClick={toggle}>
-			<Close />
+			<Icon name='close' />
 		</button>
 	)
 }

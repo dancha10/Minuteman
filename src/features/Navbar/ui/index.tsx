@@ -1,11 +1,8 @@
 import { FC, ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 
+import { Icon } from 'shared/ui/atoms/icon'
 import { SCREENS } from 'shared/lib'
-
-import { ReactComponent as Users } from '../lib/users.svg'
-import { ReactComponent as Chat } from '../lib/chat.svg'
-import { ReactComponent as Paper } from '../lib/paper.svg'
 
 import './style.scss'
 
@@ -18,17 +15,17 @@ type RouterTypes = {
 const routerElements: Array<RouterTypes> = [
 	{
 		endpoint: SCREENS.USERS,
-		icon: <Users />,
+		icon: <Icon name='users' />,
 		title: 'Участники',
 	},
 	{
 		endpoint: SCREENS.REVIEWS,
-		icon: <Chat />,
+		icon: <Icon name='chat' />,
 		title: 'Отзывы',
 	},
 	{
 		endpoint: SCREENS.PROFILE,
-		icon: <Paper />,
+		icon: <Icon name='paper' />,
 		title: 'Обо мне',
 	},
 ]

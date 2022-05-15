@@ -5,9 +5,9 @@ import Pagination from 'rc-pagination'
 import { UserList } from 'shared/ui/organisms/user-list'
 import { Skeleton } from 'shared/ui/atoms/skeleton'
 import { Empty } from 'shared/ui/atoms/empty'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import { $currentPaginationList, $userList, getUserList, getUserListFx, setCurrentPage } from '../model'
-import { ReactComponent as Arrow } from '../next.svg'
 
 import './style.scss'
 
@@ -86,12 +86,12 @@ export const UserPagination: FC<IPagination> = ({ rangeViewer }) => {
 						pageSizeOptions={[1, 2, 5, 10]}
 						nextIcon={
 							<div className='pagination__dots--next'>
-								<Arrow />
+								<Icon name='next' />
 							</div>
 						}
 						prevIcon={
 							<div className='pagination__dots--prev'>
-								<Arrow />
+								<Icon name='next' />
 							</div>
 						}
 					/>

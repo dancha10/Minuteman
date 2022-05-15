@@ -2,11 +2,8 @@ import { FC, useCallback } from 'react'
 import { useStore } from 'effector-react'
 import classList from 'classnames'
 
-import { ReactComponent as GreenBubble } from '../lib/greenBubbles.svg'
-import { ReactComponent as RedBubble } from '../lib/redBubbles.svg'
-import { ReactComponent as Check } from '../lib/check.svg'
-import { ReactComponent as Cross } from '../lib/cross.svg'
-import { ReactComponent as Close } from '../lib/close.svg'
+import { Icon } from 'shared/ui/atoms/icon'
+
 import { $isActiveNotification, $typeNotify, INotification, notificationClosed, setNotify } from '../model'
 
 import './style.scss'
@@ -56,17 +53,19 @@ export const Notification: FC<INotification> = ({ type, message, title }) => {
 							: 'notification__circle-inner notification__circle-inner--error'
 					}
 				>
-					{type === 'success' ? <Check /> : <Cross />}
+					{type === 'success' ? <Icon name='check' /> : <Icon name='cross' />}
 				</div>
 			</div>
-			<div className='notification__bubble'>{type === 'success' ? <GreenBubble /> : <RedBubble />}</div>
+			<div className='notification__bubble'>
+				{type === 'success' ? <Icon name='greenBubbles' /> : <Icon name='redBubbles' />}
+			</div>
 			<div className='notification__message'>
 				<div className='notification__title'>{title}</div>
 				<p>{message}</p>
 			</div>
 			<div className='notification__close'>
 				<button onClick={() => notificationClosed(true)}>
-					<Close />
+					<Icon name='close' />
 				</button>
 			</div>
 		</div>

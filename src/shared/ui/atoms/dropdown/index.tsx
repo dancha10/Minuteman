@@ -2,8 +2,7 @@ import { FC } from 'react'
 import Select, { components, SingleValue } from 'react-select'
 
 import { Types } from 'shared/lib'
-
-import { ReactComponent as Arrow } from './arrow.svg'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import './style.scss'
 
@@ -22,7 +21,7 @@ const DropdownIndicator = (props: any) => {
 	return (
 		components.DropdownIndicator && (
 			<components.DropdownIndicator {...props}>
-				<Arrow />
+				<Icon name='dropdownArrow' />
 			</components.DropdownIndicator>
 		)
 	)

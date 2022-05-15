@@ -2,8 +2,7 @@ import { FC, ReactNode } from 'react'
 import classList from 'classnames'
 
 import { Loader } from 'shared/ui/atoms/loader'
-
-import { ReactComponent as File } from './file.svg'
+import { Icon } from 'shared/ui/atoms/icon'
 
 import './style.scss'
 
@@ -18,7 +17,7 @@ export const FilePreview: FC<IFilePreview> = ({ fileName, percent, error, action
 	return (
 		<div className='file-preview'>
 			<div className='file-preview__container'>
-				<File />
+				<Icon name='file' />
 				<div className='file-preview__body'>
 					<p
 						className={classList('file-preview__file-name', {
