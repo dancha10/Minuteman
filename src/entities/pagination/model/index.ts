@@ -31,7 +31,7 @@ sample({
 	target: $firstListIndex,
 })
 
-export const filteredList = createEvent<string>()
+export const filteredList = createEvent<string | boolean>()
 export const $filteredUserList = $userList.map(list => list)
 
 sample({

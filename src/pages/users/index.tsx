@@ -1,7 +1,9 @@
 import { FC } from 'react'
+import { SingleValue } from 'react-select'
 
 import { UserPagination, UserPaginationModel } from 'entities/pagination'
 import { Dropdown } from 'shared/ui/atoms/dropdown'
+import { Types } from 'shared/lib'
 
 import './style.scss'
 
@@ -13,14 +15,15 @@ const options: { value: string; label: string }[] = [
 ]
 
 const UsersPage: FC = () => {
-	const onChangedDropdownOption = (props: string) => UserPaginationModel.filteredList(props)
+	const onChangedDropdownOption = (status: SingleValue<Types.OptionProps['option']>) =>
+		UserPaginationModel.filteredList(typeof status?.value === 'string' ? status.value : '')
 
 	return (
 		<div className='user-page'>
 			<div className='user-page__header'>
 				<h3>Участники</h3>
 				<div className='user-page__dropdown'>
-					<Dropdown options={options} onChanged={onChangedDropdownOption} />
+					<Dropdown options={options} onSelect={onChangedDropdownOption} />
 				</div>
 			</div>
 			<div className='user-page__user-list user-list'>

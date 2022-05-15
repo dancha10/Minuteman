@@ -1,7 +1,9 @@
 import { FC, useEffect } from 'react'
+import { SingleValue } from 'react-select'
 
 import { Dropdown } from 'shared/ui/atoms/dropdown'
 import { ReviewList, ReviewListModel } from 'widgets/review-list'
+import { Types } from 'shared/lib'
 
 import './style.scss'
 
@@ -16,14 +18,16 @@ const ReviewsPage: FC = () => {
 		ReviewListModel.changedFilterStatus('unpublished')
 	}, [])
 
-	const onChangedDropdownOption = (status: string) => ReviewListModel.changedFilterStatus(status)
+	const onChangedDropdownOption = (status: SingleValue<Types.OptionProps['option']>) => {
+		ReviewListModel.changedFilterStatus(typeof status?.value === 'string' ? status.value : '')
+	}
 
 	return (
 		<div className='reviews-page'>
 			<div className='reviews-page__header'>
 				<h3>Отзывы</h3>
 				<div className='reviews-page__dropdown'>
-					<Dropdown options={options} onChanged={onChangedDropdownOption} />
+					<Dropdown options={options} onSelect={onChangedDropdownOption} />
 				</div>
 			</div>
 			<div className='reviews-page__reviews-area'>
