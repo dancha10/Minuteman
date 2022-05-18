@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import classList from 'classnames'
 
 import { Types } from 'shared/lib'
@@ -25,12 +25,9 @@ export const Textarea: FC<ITextarea> = ({
 }) => {
 	const [currentLength, setCurrentLength] = useState<number>(0)
 
-	const changeValue = (value: string): void => setCurrentLength(value.length)
-
-	const onChangeText = (text: string) => {
-		changeValue(text)
-		onChange && onChange(text)
-	}
+	useEffect(() => {
+		setCurrentLength(value?.length ?? 0)
+	}, [value])
 
 	return (
 		<div className={classList('textarea', { 'textarea--error': isError })}>
@@ -39,7 +36,7 @@ export const Textarea: FC<ITextarea> = ({
 				<textarea
 					{...validation}
 					placeholder={placeholder}
-					onChange={event => onChangeText(event.target.value)}
+					onChange={onChange && (event => onChange(event.target.value))}
 					maxLength={maxLength}
 					disabled={disabled}
 					value={value}

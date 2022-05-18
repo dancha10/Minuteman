@@ -62,16 +62,14 @@ export const UserPagination: FC<IPagination> = ({ rangeViewer }) => {
 
 	return (
 		<div className='pagination'>
-			{currentList.length > 0 ? (
-				isLoading ? (
-					[...new Array(6)].map((_, index) => (
-						<div className='pagination__skeleton' key={index}>
-							<Skeleton height='41px' width='100%' isLoading={isLoading} />
-						</div>
-					))
-				) : (
-					<CurrentPaginationList />
-				)
+			{isLoading ? (
+				[...new Array(6)].map((_, index) => (
+					<div className='pagination__skeleton' key={index}>
+						<Skeleton height='41px' width='100%' isLoading={isLoading} />
+					</div>
+				))
+			) : currentList.length > 0 ? (
+				<CurrentPaginationList />
 			) : (
 				<Empty />
 			)}

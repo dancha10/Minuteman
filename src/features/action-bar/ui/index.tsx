@@ -57,7 +57,7 @@ export const ControlComments: FC<ICommentPanel> = ({
 						</div>
 						<div className='control-comment__edit'>
 							<Button.Dark color='primary' type='button' onClickHandler={handler}>
-								<Icon name='edit' />
+								<Icon name='edit' className='control-comment__edit--btn' />
 							</Button.Dark>
 						</div>
 					</>
