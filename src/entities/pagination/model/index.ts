@@ -1,4 +1,4 @@
-import { combine, createEffect, createEvent, createStore, restore, sample } from 'effector'
+import { combine, createEffect, createEvent, createStore, restore, sample } from 'effector-logger'
 
 import { Types } from 'shared/lib'
 import { getUsersList } from 'shared/api'
@@ -43,7 +43,10 @@ sample({
 	clock: filteredList,
 	source: $userList,
 	filter: (_, filterStatus) => filterStatus !== 'all',
-	fn: (list, filterStatus) => list?.filter(user => user.academyStatus === filterStatus),
+	fn: (list, filterStatus) => {
+		console.log(list, filterStatus)
+		return list?.filter(user => user.academyStatus === filterStatus)
+	},
 	target: $filteredUserList,
 })
 
@@ -65,3 +68,5 @@ sample({
 	fn: (list, indexes) => list.slice(indexes.$firstListIndex, indexes.$lastListIndex),
 	target: $currentPaginationList,
 })
+
+filteredList.watch(el => console.log(el))

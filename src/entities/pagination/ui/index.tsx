@@ -7,7 +7,7 @@ import { Skeleton } from 'shared/ui/atoms/skeleton'
 import { Empty } from 'shared/ui/atoms/empty'
 import { Icon } from 'shared/ui/atoms/icon'
 
-import { $currentPaginationList, $userList, getUserList, getUserListFx, setCurrentPage } from '../model'
+import { $currentPaginationList, $filteredUserList, getUserList, getUserListFx, setCurrentPage } from '../model'
 
 import './style.scss'
 
@@ -56,13 +56,13 @@ export const UserPagination: FC<IPagination> = ({ rangeViewer }) => {
 		getUserList()
 	}, [])
 
-	const initialList = useStore($userList)
+	const filterList = useStore($filteredUserList)
 	const isLoading = useStore(getUserListFx.pending)
 	const currentList = useStore($currentPaginationList)
 
 	return (
 		<div className='pagination'>
-			{currentList ? (
+			{currentList.length > 0 ? (
 				isLoading ? (
 					[...new Array(6)].map((_, index) => (
 						<div className='pagination__skeleton' key={index}>
@@ -77,24 +77,26 @@ export const UserPagination: FC<IPagination> = ({ rangeViewer }) => {
 			)}
 			<Skeleton isLoading={isLoading} height='30px' width='350px'>
 				<div className='pagination__dots'>
-					<Pagination
-						total={initialList?.length}
-						pageSize={rangeViewer}
-						itemRender={itemRender}
-						showSizeChanger
-						showLessItems
-						pageSizeOptions={[1, 2, 5, 10]}
-						nextIcon={
-							<div className='pagination__dots--next'>
-								<Icon name='next' />
-							</div>
-						}
-						prevIcon={
-							<div className='pagination__dots--prev'>
-								<Icon name='next' />
-							</div>
-						}
-					/>
+					{filterList.length > 0 && (
+						<Pagination
+							total={filterList?.length}
+							pageSize={rangeViewer}
+							itemRender={itemRender}
+							showSizeChanger
+							showLessItems
+							pageSizeOptions={[1, 2, 5, 10]}
+							nextIcon={
+								<div className='pagination__dots--next'>
+									<Icon name='next' className='pagination__dots-icons' />
+								</div>
+							}
+							prevIcon={
+								<div className='pagination__dots--prev'>
+									<Icon name='next' className='pagination__dots-icons' />
+								</div>
+							}
+						/>
+					)}
 				</div>
 			</Skeleton>
 		</div>

@@ -10,7 +10,7 @@ import './style.scss'
 const options: { value: string; label: string }[] = [
 	{ value: 'all', label: 'Все' },
 	{ value: 'expelled', label: 'Отчислен' },
-	{ value: 'studying', label: 'Обучается' },
+	{ value: 'studies', label: 'Обучается' },
 	{ value: 'graduated', label: 'Закончил' },
 ]
 

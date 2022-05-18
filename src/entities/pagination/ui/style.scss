@@ -1,6 +1,7 @@
 @import "src/app/styles/variables";
 
 .pagination {
+  height: 595px;
 
   &__skeleton {
     height: 88px;
@@ -48,6 +49,10 @@
       transform: rotate(180deg);
       line-height: 32px;
     }
+  }
+
+  &__dots-icons {
+    height: 30px;
   }
 
   & .rc-pagination-item {
