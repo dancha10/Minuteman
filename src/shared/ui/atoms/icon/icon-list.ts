@@ -28,6 +28,7 @@ import { ReactComponent as redBubbles } from 'shared/images/redBubbles.svg'
 import { ReactComponent as reddit } from 'shared/images/reddit.svg'
 import { ReactComponent as reject } from 'shared/images/reject.svg'
 import { ReactComponent as reload } from 'shared/images/reload.svg'
+import { ReactComponent as search } from 'shared/images/search.svg'
 import { ReactComponent as telegram } from 'shared/images/telegram.svg'
 import { ReactComponent as twirl } from 'shared/images/twirl.svg'
 import { ReactComponent as twirlTwo } from 'shared/images/twirlTwo.svg'
@@ -65,6 +66,7 @@ export const iconList = Object.freeze({
 	reddit,
 	reload,
 	reject,
+	search,
 	telegram,
 	twirl,
 	twirlTwo,

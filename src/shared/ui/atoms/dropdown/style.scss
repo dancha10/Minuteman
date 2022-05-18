@@ -1,7 +1,62 @@
 @import "src/app/styles/variables";
 
 .dropdown-wrapper {
+  position: relative;
   width: 100%;
+
+  &[data-is-search='true'] {
+    .dropdown__menu {
+      margin-bottom: 0 !important;
+      margin-top: 64px !important;
+    }
+  }
+
+  // .dropdown-wrapper__search-wrapper
+  &__search-wrapper {
+    position: absolute;
+    bottom: -65px;
+    left: 0;
+    width: 100%;
+    height: 66px;
+    padding: 12px;
+    background: #FFFFFF;
+    z-index: 10;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0),
+    -5px 0 5px -5px rgba(0, 0, 0, 0.16),
+    5px 0 5px -5px rgba(0, 0, 0, 0.16),
+    0 0 40px rgba(0, 0, 0, 0) inset;
+  }
+
+  // .dropdown-wrapper__search
+  &__search {
+    position: relative;
+  }
+
+  // .dropdown-wrapper__input
+  &__input {
+    width: 100%;
+    height: 42px;
+    padding: 10px 10px 10px 34px;
+    border: 1px solid $lightGrey;
+    border-radius: 2px;
+    color: $dark;
+
+    &::placeholder {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      color: $grey;
+    }
+  }
+
+  // .dropdown-wrapper__magnifier
+  &__magnifier {
+    position: absolute;
+    width: 14px;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
   & label {
     font-family: $fontFamilyFactor;

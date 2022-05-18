@@ -123,6 +123,7 @@ export const ProfileForm: FC = () => {
 						value={fields.cityOfResidence.value}
 						isFirstElement={false}
 						isDisabled={!isEditMode}
+						isSearch
 					/>
 				</div>
 				<div className='profile-form__dropdown-wrapper'>
