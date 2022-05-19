@@ -10,6 +10,7 @@ import { ReactComponent as trash } from 'shared/images/delete.svg'
 import { ReactComponent as edit } from 'shared/images/edit.svg'
 import { ReactComponent as eye } from 'shared/images/eye.svg'
 import { ReactComponent as eyeClosed } from 'shared/images/eyeClosed.svg'
+import { ReactComponent as editAvatar } from 'shared/images/editAvatar.svg'
 import { ReactComponent as female } from 'shared/images/female.svg'
 import { ReactComponent as file } from 'shared/images/file.svg'
 import { ReactComponent as greenBubbles } from 'shared/images/greenBubbles.svg'
@@ -48,6 +49,7 @@ export const iconList = Object.freeze({
 	edit,
 	eye,
 	eyeClosed,
+	editAvatar,
 	female,
 	file,
 	greenBubbles,

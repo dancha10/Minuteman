@@ -59,7 +59,7 @@ export const ProfileForm: FC = () => {
 						<p>Фото профиля</p>
 						<UploadFile onChangeFile={fields.profileImage.onChange}>
 							<div className='profile-form__upload-file'>
-								<Icon name='edit' />
+								<Icon name='editAvatar' />
 								Изменить фото
 							</div>
 						</UploadFile>

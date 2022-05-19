@@ -18,12 +18,15 @@ sample({
 
 sample({
 	clock: checkAuthFx.doneData,
-	fn: token => !!token,
+	fn: Boolean,
 	target: AuthModel.$isAuthenticated,
 })
 
 const clearLocalStorageFx = createEffect(() => localStorage.removeItem('@token'))
-const redirectToLoginPageFx = createEffect(() => history.push('/login'))
+const redirectToLoginPageFx = createEffect(() => {
+	history.replace('/login')
+	window.location.reload()
+})
 
 sample({
 	clock: [

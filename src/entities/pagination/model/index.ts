@@ -1,4 +1,4 @@
-import { combine, createEffect, createEvent, createStore, restore, sample } from 'effector-logger'
+import { combine, createEffect, createEvent, createStore, restore, sample } from 'effector'
 
 import { Types } from 'shared/lib'
 import { getUsersList } from 'shared/api'

@@ -26,6 +26,12 @@
     }
   }
 
+  & .user-comment {
+    @media (max-width: $md3) {
+      height: 0;
+    }
+  }
+
   &__action-bar {
     padding: 0px 24px 0px 24px;
     display: flex;
@@ -73,6 +79,9 @@
 
     &--btn {
       margin-left: -6px;
+      @media (max-width: $md3) {
+        margin-left: 10px;
+      }
     }
   }
 

@@ -63,7 +63,7 @@ export const ControlComments: FC<ICommentPanel> = ({
 					</>
 				) : status === 'approved' ? (
 					<div className='control-comment__feedback control-comment__feedback--published'>
-						<Icon name='check' />
+						<Icon name='approve' />
 						<p>Отзыв опубликован</p>
 					</div>
 				) : (
